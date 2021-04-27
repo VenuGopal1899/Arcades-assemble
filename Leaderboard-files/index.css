@@ -6,16 +6,16 @@ body{
 }
 
 .leaderboard_pop {
-	width: 100px;
-  	height: 100px;
-	position: fixed;
+  width: 100px;
+    height: 100px;
+  position: fixed;
     bottom: 20px;
     right: 10px; 
     line-height: 1;
     cursor: pointer;
-	-webkit-animation: wobble-hor-bottom 1s both;
-	        animation: wobble-hor-bottom 1s both;
-	        animation-iteration-count: infinite;
+  -webkit-animation: wobble-hor-bottom 5s both;
+          animation: wobble-hor-bottom 5s both;
+          animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes wobble-hor-bottom {
@@ -26,25 +26,29 @@ body{
     -webkit-transform-origin: 50% 50%;
             transform-origin: 50% 50%;
   }
-  15% {
+  10% {
     -webkit-transform: translateX(-30px) rotate(-6deg);
             transform: translateX(-30px) rotate(-6deg);
   }
-  30% {
+  15% {
     -webkit-transform: translateX(15px) rotate(6deg);
             transform: translateX(15px) rotate(6deg);
   }
-  45% {
+  20% {
     -webkit-transform: translateX(-15px) rotate(-3.6deg);
             transform: translateX(-15px) rotate(-3.6deg);
   }
-  60% {
+  25% {
     -webkit-transform: translateX(9px) rotate(2.4deg);
             transform: translateX(9px) rotate(2.4deg);
   }
-  75% {
+  30% {
     -webkit-transform: translateX(-6px) rotate(-1.2deg);
             transform: translateX(-6px) rotate(-1.2deg);
+  }
+  40% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
   }
 }
 @keyframes wobble-hor-bottom {
@@ -55,27 +59,32 @@ body{
     -webkit-transform-origin: 50% 50%;
             transform-origin: 50% 50%;
   }
-  15% {
+  10% {
     -webkit-transform: translateX(-30px) rotate(-6deg);
             transform: translateX(-30px) rotate(-6deg);
   }
-  30% {
+  15% {
     -webkit-transform: translateX(15px) rotate(6deg);
             transform: translateX(15px) rotate(6deg);
   }
-  45% {
+  20% {
     -webkit-transform: translateX(-15px) rotate(-3.6deg);
             transform: translateX(-15px) rotate(-3.6deg);
   }
-  60% {
+  25% {
     -webkit-transform: translateX(9px) rotate(2.4deg);
             transform: translateX(9px) rotate(2.4deg);
   }
-  75% {
+  30% {
     -webkit-transform: translateX(-6px) rotate(-1.2deg);
             transform: translateX(-6px) rotate(-1.2deg);
   }
+  40% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
 }
+
 
 .hide{
 	visibility: hidden;
