@@ -9,6 +9,9 @@ var resetButton = document.querySelector("#reset");
 var modeButtons = document.querySelectorAll(".mode");
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
+var score = 0;
+var maxScore = 100;
+var alreadyWon = false;
 
 init();
 
@@ -38,13 +41,17 @@ function setupSquares(){
 			var clickedColor = this.style.background;
 			//compare color to pickedColor
 			if(clickedColor === pickedColor){
-				messageDisplay.textContent = "Correct!";
+				if(!alreadyWon)
+				score += maxScore;
+				alreadyWon = true;
+				messageDisplay.textContent = "SCORE : " + score;
 				resetButton.textContent = "Play Again?"
 				changeColors(clickedColor);
 				h1.style.background = clickedColor;
 			} else {
+				maxScore -= 20;
 				this.style.background = "#232323";
-				messageDisplay.textContent = "Try Again"
+				messageDisplay.textContent = "SCORE : " + score;
 			}
 		});
 	}
@@ -53,13 +60,15 @@ function setupSquares(){
 
 
 function reset(){
+	maxScore = 100;
+	alreadyWon = false;
 	colors = generateRandomColors(numSquares);
 	//pick a new random color from array
 	pickedColor = pickColor();
 	//change colorDisplay to match picked Color
 	colorDisplay.textContent = pickedColor;
 	resetButton.textContent = "New Colors"
-	messageDisplay.textContent = "";
+	messageDisplay.textContent = "SCORE : " + score;
 	//change colors of squares
 	for(var i = 0; i < squares.length; i++){
 		if(colors[i]){

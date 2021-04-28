@@ -50,8 +50,19 @@ h1 {
 }
 
 #message {
+  /*border-radius: 10%;*/
+  /*font-weight: 3px;*/
   display: inline-block;
   width: 20%;
+  text-transform: uppercase;
+  height: 100%;
+  font-weight: 700;
+  color: steelblue;
+  letter-spacing: 1px;
+  font-size: inherit;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  outline: none;
 }
 
 #stripe {
@@ -221,7 +232,6 @@ a:hover{
             transform: translateX(0%);
   }
 }
-
 
 .hide{
   visibility: hidden;
