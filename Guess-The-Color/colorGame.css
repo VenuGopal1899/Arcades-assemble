@@ -99,31 +99,38 @@ button:hover {
 
 /*//////Nav-bar code integrated/////////*/
 .head{
-  font-family: "Montserrat";
-  color: white;
+  /* font-family: "Montserrat"; */
+
+  background-color: white;
   height: 10%;
   text-align: -moz-center;
-  background: linear-gradient(to right,#8e0e00, #1f1c18 );
+  font-family: 'Cinzel Decorative';
   line-height: 1.1;
-    text-align: center;
-    padding: 2px 0;
+  text-align: center;
+  padding: 2px 0;
+  font-family: 'Cinzel Decorative';
 }
 h2{
     font-size: 40px;
     font-weight: normal;
     word-spacing: 16px;
-    line-height: 60%;
+    background: linear-gradient(to right,#8e0e00, #1f1c18 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
 }
 
 ul{
     list-style-type: none;
+    font-family: "Montserrat";
     margin: 0;
     padding: 0;
     overflow: hidden;
     height: 30%;
     padding: 12px 0px 20px 15px;
-    background-color: white;
+    background-color: whitesmoke;
     border-radius: 20px;
+    font-family: "Montserrat";
 }
 
 li{
@@ -155,12 +162,12 @@ a:hover{
 
 .leaderboard_pop {
   width: 100px;
-    height: 100px;
+  height: 100px;
   position: fixed;
-    bottom: 20px;
-    right: 10px; 
-    line-height: 1;
-    cursor: pointer;
+  bottom: 20px;
+  right: 10px; 
+  line-height: 1;
+  cursor: pointer;
   -webkit-animation: wobble-hor-bottom 5s both;
           animation: wobble-hor-bottom 5s both;
           animation-iteration-count: infinite;
