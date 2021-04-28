@@ -65,6 +65,10 @@ body h2{
   color: black;
 }
 
+.mode, #reset{
+  cursor: pointer;
+}
+
 .selected, .selected:hover {
   color: steelblue;
   background: white;
