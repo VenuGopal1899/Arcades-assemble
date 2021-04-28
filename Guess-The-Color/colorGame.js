@@ -9,6 +9,7 @@ var resetButton = document.querySelector("#reset");
 var modeButtons = document.querySelectorAll(".mode");
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
+var span = document.getElementsByClassName("close")[0];
 var score = 0;
 var maxScore = 100;
 var alreadyWon = false;
@@ -121,17 +122,15 @@ function randomColor(){
 	return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
-
 /////leaderboard pop up///////////
+
 btn.addEventListener("click", function(){
 	modal.style.display = "block";
 })
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
 span.addEventListener("click", function(){
 	modal.style.display = "none";
 })
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {

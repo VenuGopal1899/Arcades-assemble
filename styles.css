@@ -1,15 +1,19 @@
 .header{
     text-align: -moz-center;
     font-family: 'Cinzel Decorative';
+    background-color: white;
+    text-align: center;
 }
 
 h1{
     word-spacing: 16px;
-    width: max-content;
+    width: 100%;
+    height: 10%;
+    text-align: -moz-center;
     font-size: 46px;
     background: linear-gradient(to right,#8e0e00, #1f1c18 );
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .games-nav-bar{

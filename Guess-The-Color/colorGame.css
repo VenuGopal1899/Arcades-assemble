@@ -50,8 +50,6 @@ h1 {
 }
 
 #message {
-  /*border-radius: 10%;*/
-  /*font-weight: 3px;*/
   display: inline-block;
   width: 20%;
   text-transform: uppercase;
@@ -99,8 +97,6 @@ button:hover {
 
 /*//////Nav-bar code integrated/////////*/
 .head{
-  /* font-family: "Montserrat"; */
-
   background-color: white;
   height: 10%;
   text-align: -moz-center;
@@ -108,7 +104,6 @@ button:hover {
   line-height: 1.1;
   text-align: center;
   padding: 2px 0;
-  font-family: 'Cinzel Decorative';
 }
 h2{
     font-size: 40px;
