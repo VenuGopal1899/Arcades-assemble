@@ -1,5 +1,8 @@
 <html lang="en">
+
 <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +12,9 @@
 </head>
 
 <body>
-    <div class="header"><h1>Arcades Assemble (▀̿Ĺ̯▀̿ ̿)</h1></div>
+    <div class="header">
+        <h1>Arcades Assemble (▀̿Ĺ̯▀̿ ̿)</h1>
+    </div>
     <ul>
         <li><a href="/#" class="flappy-bird">Flappy Bird</a></li>
         <li><a href="/#" class="gaem-2048">2048</a></li>
@@ -19,9 +24,37 @@
         <li><a href="/#">Logout</a></li>
         <li><a href="../index.html">Return</a></li>
     </ul>
-    <div class="game">
-        <canvas id="grid"></canvas>
-    </div>
-    <script src="tetris.js"></script>
+    <div class="container">
+        <div class="game">
+            <canvas id="grid"></canvas>
+        </div>
+        <div class="side-panel">
+            <div class="next box">
+                <span class="next-text">NEXT</span>
+                <div class="next-coming-block blocks">
+                </div>
+            </div>
+            <div class="scores box">
+                <span class="next-text">SCORES</span>
+                <div class="scores-value blocks">0</div>
+            </div>
+            <div class="lines box">
+                <span class="next-text">LINES</span>
+                <div class="lines-value blocks">0</div>
+            </div>
+            <div class="level box">
+                <span class="next-text">LEVEL</span>
+                <div class="level-value blocks">0</div>
+            </div>
+            <div class="button-set">
+            <button class="buttons-game" id="startgame">Start New Game</button>
+               <br>
+            <button class="buttons-game" id="Pause">Pause</button>
+            <button class="buttons-game" id="End">End Game</button>
+
+            </div>
+        </div>
+        <script src="tetris.js"></script>
 </body>
+
 </html>
