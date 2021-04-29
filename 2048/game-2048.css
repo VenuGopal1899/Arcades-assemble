@@ -9,23 +9,38 @@ html {
 }
 .info {
   display: flex;
-  justify-content: space-between;
-  margin: 0.5rem 10rem;
+  justify-content: center;
 }
 
+/* .game-name {
+  text-align: center;
+  height: 3.4rem;
+  width: 5rem;
+  border-radius: 8%;
+  
+} */
+
+ul#list_info {
+  min-width: auto;
+  list-style: none;
+}
+#list_info li {
+  margin: 10px;
+  float: left;
+}
 .score-container {
   text-align: center;
   height: 3.4rem;
   width: 5rem;
   border-radius: 8%;
-  background-color: #8f7a66;
+  background-color: #78c5f1;
 }
 
 .wrapper {
-  width: 30rem;
-  height: 29.5rem;
-  margin: 0 auto;
-  background-color: #aaaca8;
+  width: 400px;
+  height: 400px;
+  margin: 10px auto;
+  background-color: #219dce;
 }
 
 .grid {
@@ -34,25 +49,25 @@ html {
 }
 
 .cell {
-  width: 6rem;
-  height: 6rem;
-  margin: 1rem 1rem 0 0;
-  background-color: #c5c6be;
+  width: 90px;
+  height: 90px;
+  margin: 8px 8px 0 0;
+  background-color: #cdf0f1;
   float: left;
 }
 
 .cell:nth-child(4n + 1) {
-  margin-left: 1.5rem;
+  margin-left: 8px;
 }
 
 .number {
   position: absolute;
-  height: 6rem;
-  width: 6rem;
-  font-size: 4rem;
+  height: 90px;
+  width: 90px;
+  font-size: 42px;
   font-weight: bold;
   text-align: center;
-  line-height: 6rem;
+  line-height: 82px;
   background-color: whitesmoke;
   color: #afa192;
   transition: all 0.4s;

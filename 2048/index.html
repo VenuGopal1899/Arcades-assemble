@@ -9,19 +9,24 @@
   </head>
   <body>
     <div class="info">
-      <h1>2048</h1>
-      <div class="score-container">
-        <div>Score</div>
-        <div class="score">0</div>
+      <div class="game-name">
+        <h1 style="margin-top: 0px; color: rgb(236, 15, 15)">2048</h1>
+      </div>
+      <div
+        class="score-counter"
+        style="display: flex; justify-content: space-between; margin-left: 70px"
+      >
+        <div class="score-container">
+          <div>Score</div>
+          <div class="score">0</div>
+        </div>
+
+        <button class="new-game score-container" style="margin-left: 10px">
+          New Game
+        </button>
       </div>
     </div>
-    <div class="info">
-      <div class="result" style="margin: 5vmin 15vmin">
-        Join the numbers and get to the
-        <span style="font-weight: bold">2048</span> tile!
-      </div>
-      <button class="new-game score-container">New Game</button>
-    </div>
+
     <div class="wrapper">
       <div class="grid">
         <div class="cell"></div>
