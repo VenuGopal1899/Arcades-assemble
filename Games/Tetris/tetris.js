@@ -15,10 +15,13 @@ var highScore=0;
 var score=0;
 var difficultyLevel=3;
 
-
 var board = [];
 for(var i = 0; i < row; i++)
     board.push(new Array(col).fill(boardColour));
+
+var pauseBoard = [];
+for(var i = 0; i < row; i++)
+    pauseBoard.push(new Array(col).fill(boardColour));
 
 /* Funtion to draw single Pixel */
 function drawPixel( x, y, color) {
@@ -45,12 +48,22 @@ function removePiece() {
                 drawPixel( piece.xPos +j, piece.yPos+i, boardColour);
 }
 /* Funtion to draw board */
-function drawBoard() {
+function drawBoard(gameBoard) {
     for(var i = 0; i < row; i++)
         for(var j = 0;j < col; j++)
-            drawPixel( j, i, board[i][j]);
+            drawPixel( j, i, gameBoard[i][j]);
 }
-drawBoard();
+
+/* Object preloading sounds */
+const sound={
+    main: new Audio('./sound/main.mp3'),
+    line: new Audio('./sound/line.mp3'),
+    move: new Audio('./sound/move.mp3'),
+    fall: new Audio('./sound/fall.mp3'),
+    rotate: new Audio('./sound/rotate.mp3'),
+    hold: new Audio('./sound/swap.mp3'),
+    gameover: new Audio('./sound/gameover.mp3')
+}
 
 const I=[   [ 0, 0, 0, 0],
             [ 1, 1, 1, 1],
@@ -115,18 +128,29 @@ var srsMapI = new Map(  [
 ]);*/ //Akira SRS rotation system for I piece
 
 var tetromino = [ I, O, T, S, Z, J, L]; /*Array to hold default tetromino */
-var colours = [ "cyan", "yellow", "purple", "green", "red", "blue", "orange"]
+var colours = [ "cyan", "yellow", "purple", "green", "red", "blue", "orange"];
 var piece = newPiece();
 var nextPiece = newPiece();
 var holdPiece = null; /* Holds swapped pieces */
 var holdLock = false; /* prevents swaping tetromino untill swaped piece is placed */
+var moveLock=false;/* Lock movement while dropping by default */
+var pause=true;/* Pause variable */
 
 /* Funtion to generate new tetromino */
 function newPiece() {
     var choice = Math.floor(Math.random()*tetromino.length);
     return {pieceName: tetromino[choice], colour: colours[choice], xPos: 3, yPos: -2, rotation: 0, type: choice};
 }
-
+/* Funtion to Pause Game */
+function togglePause() {
+    if(pause) {
+        drawBoard(board);
+        drawPiece();
+    }
+    else
+        drawBoard(pauseBoard);
+    pause=!pause;
+}
 document.addEventListener( "keydown", inputKey);
 function inputKey(event)
 {
@@ -144,10 +168,15 @@ function inputKey(event)
         rotateBlock("right");
     else if(event.keyCode==32)
         swapPiece();
+    else if(event.keyCode==27)
+        togglePause();
+    else if(event.keyCode==13)
+        newGame();
 }
 /* Funtion for movement */
 function move(direction) {
-    
+    if(moveLock)
+        return;
     if(direction == "left" && !checkCollision( piece.pieceName, piece.xPos - 1, piece.yPos)) {
         removePiece();
         piece.xPos -= 1;
@@ -163,6 +192,7 @@ function move(direction) {
         piece.yPos += 1;
         drawPiece();
     }   
+    sound.move.play();
 }
 /* Funtion to check collision */
 function checkCollision( block, xPos, yPos) {
@@ -245,6 +275,7 @@ function rotateBlock(dir) {
             piece.yPos += offsetArr[i][1]; /* setting Y offset */
             piece.rotation = rotationNew;  /* Update rotation value */
             drawPiece();
+            sound.rotate.play();
             break;
         }
     }
@@ -254,7 +285,16 @@ function newGame() {
     for(var i = 0;i < row; i++)
         for(var j = 0; j < col; j++)
             board[i][j] = boardColour; /* clearing board */
-    drawBoard();
+    drawBoard(board);
+    sound.main.loop=true;
+    sound.main.volume=0.4;
+    sound.main.play();
+    piece=newPiece();
+    nextPiece=newPiece();
+    holdPiece=null;
+    holdLock=false;
+    moveLock=false;
+    pause=false;
     lineClear = 0;
 }
 /* Funtion to end current game */
@@ -262,8 +302,10 @@ function gameOver() {
     score=lineClear*10;
     if( score > highScore)
         highScore = score;
-    if( !alert("Game Over\nScore:" + score +"\nHigh Score:" + highScore)) 
-        newGame(); 
+    sound.gameover.play();
+    pause=true;
+    //if( !alert("Game Over\nScore:" + score +"\nHigh Score:" + highScore)) 
+    //    newGame(); 
 }
 /* Funtion to swap tetromino */ 
 function swapPiece() {
@@ -281,6 +323,7 @@ function swapPiece() {
             piece = holdPiece;
             holdPiece = temp;
         }
+        sound.hold.play();
     }
     holdLock = true;    /* Setting swap lock */
 }
@@ -295,6 +338,7 @@ function mergeBoard() {
                 }
                 board[ i + piece.yPos][ j + piece.xPos] = piece.colour;
         }
+    sound.fall.play();
     holdLock = false; /* Releasing swap lock */
 }
 /* Funtion to clear filled rows */
@@ -311,12 +355,16 @@ function checkLine() {
             board.splice( i, 1);
             lineClear += 1;
             board.unshift( new Array(col).fill(boardColour));
-            drawBoard();
+            sound.line.play();
+            drawBoard(board);
         }
     }
 }
 /* Funtion to drop tetromino continuously */
 function defaultDrop() {
+    if(pause)
+        return false;
+    moveLock=true;
     if( checkCollision( piece.pieceName, piece.xPos, piece.yPos+1)) {
         mergeBoard();
         checkLine();
@@ -329,8 +377,9 @@ function defaultDrop() {
         piece.yPos += 1;
     }
     drawPiece();
+    moveLock=false;
     return true;
 }
-
+drawBoard(board);
 setInterval( defaultDrop, 1000/difficultyLevel);
 
