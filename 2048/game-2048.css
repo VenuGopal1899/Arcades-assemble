@@ -1,0 +1,63 @@
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  font-size: larger;
+  font: "Clear Sans", "Helvetica Neue", "Arial", "sans-serif";
+  background-color: #faf8ef;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 10rem;
+}
+
+.score-container {
+  text-align: center;
+  height: 3.4rem;
+  width: 5rem;
+  border-radius: 8%;
+  background-color: #8f7a66;
+}
+
+.wrapper {
+  width: 30rem;
+  height: 29.5rem;
+  margin: 0 auto;
+  background-color: #aaaca8;
+}
+
+.grid {
+  width: 100%;
+  position: relative;
+}
+
+.cell {
+  width: 6rem;
+  height: 6rem;
+  margin: 1rem 1rem 0 0;
+  background-color: #c5c6be;
+  float: left;
+}
+
+.cell:nth-child(4n + 1) {
+  margin-left: 1.5rem;
+}
+
+.number {
+  position: absolute;
+  height: 6rem;
+  width: 6rem;
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 6rem;
+  background-color: whitesmoke;
+  color: #afa192;
+  transition: all 0.4s;
+}
+
+.new-game {
+  cursor: pointer;
+}
