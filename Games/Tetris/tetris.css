@@ -28,7 +28,7 @@ body {
     margin-top: 10px;
     margin-left: 12px;
     background: rgb(39,60,161);
-    height: 436px;
+    height: 505px;
     width: 200px;
     border: 8px solid rgb(39,60,161);
     border-radius: 16px;
@@ -68,19 +68,19 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .scores-value
 {
-    height:35px;
+    height:32px;
 }
 .lines-value
 {
-    height:35px;
+    height:32px;
 }
 .level-value
 {
-    height:35px;
+    height:32px;
 }
 .next-coming-block
 {
-height:100px;
+height:66px;
 }
 .scores
 {
