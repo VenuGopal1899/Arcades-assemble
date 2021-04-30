@@ -28,6 +28,7 @@ var lineClear=0;
 var highScore=0;
 var score=0;
 var difficultyLevel=3;
+
 document.getElementById("score").innerHTML = lineClear*10;
 document.getElementById("line").innerHTML = lineClear;
 
@@ -107,6 +108,7 @@ function drawBoard(gameBoard) {
     for(var i = 0; i < row; i++)
         for(var j = 0;j < col; j++)
             drawPixel( j, i, gameBoard[i][j]);
+
     document.getElementById("level").innerHTML = difficultyLevel;
 }
 /* Funtion to draw next piece board */
@@ -133,6 +135,8 @@ function clearHoldPiece() {
         for(var j = 0; j < 7; j++)
             drawPixelHold( j, i, boardColour);
 }
+}
+
 /* Object preloading sounds */
 const sound={
     main: new Audio('./sound/main.mp3'),
@@ -224,11 +228,14 @@ function newPiece() {
 function togglePause() {
     if(pause) {
         drawBoard(board);
+
         drawPieceBoard(pieceBoard);
         drawHoldPieceBoard(holdBoard);
         drawPiece();
         drawNextPiece();
         drawHoldPiece();
+
+        drawPiece();
     }
     else
         drawBoard(pauseBoard);
@@ -509,3 +516,4 @@ drawBoard(board);
 drawPieceBoard(pieceBoard);
 drawHoldPieceBoard(holdBoard);
 setInterval( defaultDrop, 1000/difficultyLevel);
+
