@@ -13,8 +13,6 @@ body {
     border:8px solid rgb(39,60,161);
     border-radius: 16px;
     box-shadow: 10px 10px 5px rgb(0, 0, 0);
-
-
 }
 .container
 {
@@ -41,10 +39,7 @@ body {
 }
 .next
 {
-    
     height: 25%;
-    /* background: red; */
-       
 }
 .next-text
 {
@@ -54,17 +49,21 @@ body {
     font-stretch: semi-expanded;
     font-family: 'Oswald', sans-serif;
 }
-
+.next-coming-block
+{
+    background:rgb(10,10,10);
+    border-radius: 4px;
+    width:185px;
+}
 .blocks
 {
-background:rgb(10,10,10);
-border-radius: 4px;
-width:185px;
-color: white;
-text-align: center;
-font-size: 30px;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+    background:rgb(10,10,10);
+    border-radius: 4px;
+    width:185px;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .scores-value
 {
@@ -116,9 +115,7 @@ height:66px;
 .button-set
 {
     width: 185px;
-    height: 20%;
-
-    
+    height: 20%;   
 }
 #startgame
 {
@@ -148,7 +145,7 @@ height:66px;
     background: rgb(39,60,161);
     border: none;
     border:1px solid black;
-  font-stretch: semi-expanded;
+    font-stretch: semi-expanded;
     font-family: 'Oswald', sans-serif;
     color: white;
     border-radius: 4px;
@@ -156,19 +153,19 @@ height:66px;
 }
 .buttons-game:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
- transform: scale(1.070);
- border:2px solid black;
+    transform: scale(1.070);
+    border:2px solid black;
 }
 .header{
     text-align: center;
     word-spacing: 16px;
     width: 100%;
     font-size: 46px;
- background-color: #ff8177;
- background-image: linear-gradient(to right,#8e0e00, #1f1c18 );
-background-size: 100%;
--webkit-background-clip:text;
--webkit-text-fill-color: transparent;
+    background-color: #ff8177;
+    background-image: linear-gradient(to right,#8e0e00, #1f1c18 );
+    background-size: 100%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color: transparent;
     background-size: 100%;
 }
 

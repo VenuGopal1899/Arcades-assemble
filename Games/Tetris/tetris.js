@@ -1,5 +1,14 @@
+document.querySelectorAll("button").forEach( function(item) {
+    item.addEventListener('focus', function() {
+        this.blur();
+    })
+})
 const cvs = document.getElementById("grid");
 const ctx = cvs.getContext("2d");
+const canvasNext = document.getElementById("next");
+const ctxNext = canvasNext.getContext("2d");
+const canvasHold = document.getElementById("hold");
+const ctxHold = canvasHold.getContext("2d");
 
 ctx.canvas.width = 250;
 ctx.canvas.height = 500;
@@ -10,10 +19,18 @@ const pixel=ctx.canvas.width/col; /* Pixel size of Grid */
 const boardColour="black";  /* Board Colour */
 const gridLineColour="MidNightBlue"; /*Grid Line Colour */
 
+ctxNext.canvas.width = pixel*7;
+ctxNext.canvas.height = pixel*3;
+ctxHold.canvas.width = pixel*7;
+ctxHold.canvas.height = pixel*3;
+
 var lineClear=0;
 var highScore=0;
 var score=0;
 var difficultyLevel=3;
+
+document.getElementById("score").innerHTML = lineClear*10;
+document.getElementById("line").innerHTML = lineClear;
 
 var board = [];
 for(var i = 0; i < row; i++)
@@ -23,6 +40,14 @@ var pauseBoard = [];
 for(var i = 0; i < row; i++)
     pauseBoard.push(new Array(col).fill(boardColour));
 
+var pieceBoard = [];
+for(var i = 0; i < 3; i++)
+    pieceBoard.push(new Array(7).fill(boardColour));
+
+var holdBoard = [];
+for(var i = 0; i < 3; i++)
+    holdBoard.push(new Array(7).fill(boardColour));
+   
 /* Funtion to draw single Pixel */
 function drawPixel( x, y, color) {
     ctx.fillStyle = color;
@@ -30,14 +55,45 @@ function drawPixel( x, y, color) {
     ctx.strokeRect( x*pixel, y*pixel, pixel, pixel);
     ctx.fillRect( x*pixel, y*pixel, pixel, pixel);
 }
+/* Funtion to draw single Pixel for next piece*/
+function drawPixelNext( x, y, color) {
+    ctxNext.fillStyle = color;
+    ctxNext.strokeStyle = gridLineColour
+    ctxNext.strokeRect( x*pixel, y*pixel, pixel, pixel);
+    ctxNext.fillRect( x*pixel, y*pixel, pixel, pixel);
+}
+/* Funtion to draw single Pixel for hold piece*/
+function drawPixelHold( x, y, color) {
+    ctxHold.fillStyle = color;
+    ctxHold.strokeStyle = gridLineColour
+    ctxHold.strokeRect( x*pixel, y*pixel, pixel, pixel);
+    ctxHold.fillRect( x*pixel, y*pixel, pixel, pixel);
+}
 /* Funtion to draw tetromino */
 function drawPiece() {
-
     var block = piece.pieceName;
     for(var i = 0; i < block.length; i++)
         for(var j = 0; j < block.length; j++)
             if( block[i][j] == 1)
                 drawPixel( piece.xPos +j, piece.yPos+i, piece.colour);
+}
+/* Funtion to draw next tetromino */
+function drawNextPiece() {
+    clearPieceBoard();
+    var block = nextPiece.pieceName;
+    for(var i = 0; i < block.length; i++)
+        for(var j = 0; j < block.length; j++)
+            if( block[i][j] == 1)
+                drawPixelNext( 1+j, i, nextPiece.colour);
+}
+/* Funtion to draw next tetromino */
+function drawHoldPiece() {
+    clearHoldPiece();
+    var block = holdPiece.pieceName;
+    for(var i = 0; i < block.length; i++)
+        for(var j = 0; j < block.length; j++)
+            if( block[i][j] == 1)
+                drawPixelHold( 1+j, i, holdPiece.colour);
 }
 /* Funtion to remove tetromino */
 function removePiece() {
@@ -52,6 +108,33 @@ function drawBoard(gameBoard) {
     for(var i = 0; i < row; i++)
         for(var j = 0;j < col; j++)
             drawPixel( j, i, gameBoard[i][j]);
+
+    document.getElementById("level").innerHTML = difficultyLevel;
+}
+/* Funtion to draw next piece board */
+function drawPieceBoard(pieceBoard) {
+    for(var i = 0; i < 3; i++)
+        for(var j = 0;j < 7; j++)
+            drawPixelNext( j, i, pieceBoard[i][j]);
+}
+/* Funtion to draw hold piece board */
+function drawHoldPieceBoard(holdBoard) {
+    for(var i = 0; i < 3; i++)
+        for(var j = 0;j < 7; j++)
+            drawPixelHold( j, i, holdBoard[i][j]);
+}
+/* Funtion to clear next piece board */
+function clearPieceBoard() {
+    for(var i = 0; i < 3; i++)
+        for(var j = 0; j < 7; j++)
+            drawPixelNext( j, i, boardColour);
+}
+/* Funtion to clear hold piece board */
+function clearHoldPiece() {
+    for(var i = 0; i < 3; i++)
+        for(var j = 0; j < 7; j++)
+            drawPixelHold( j, i, boardColour);
+}
 }
 
 /* Object preloading sounds */
@@ -145,6 +228,13 @@ function newPiece() {
 function togglePause() {
     if(pause) {
         drawBoard(board);
+
+        drawPieceBoard(pieceBoard);
+        drawHoldPieceBoard(holdBoard);
+        drawPiece();
+        drawNextPiece();
+        drawHoldPiece();
+
         drawPiece();
     }
     else
@@ -280,17 +370,53 @@ function rotateBlock(dir) {
         }
     }
 }
+/* Rotate tetrominos */
+function rotateHoldBlock() {
+    var rotationPrev = holdPiece.rotation;  /* Current Rotation state */
+    if(holdPiece.type == 1 || rotationPrev == 0 || rotationPrev == 2)
+        return;
+    var block = holdPiece.pieceName.map(function(arr) {
+        return arr.slice();
+    });
+
+    var rotationNew;    /* New Rotation state */
+
+    if(rotationPrev == 1) {
+        leftRotate( block);
+        rotationNew =( rotationPrev + 3) % 4; /* New rotation state after left rotation */
+    }
+    if(rotationPrev == 3) {
+        rightRotate( block);
+        rotationNew=( rotationPrev + 1 )% 4; /* New rotation state after right rotation */
+    }
+
+    if(piece.type == 0)
+        var offsetArr = srsMapI.get( rotationPrev.toString() + rotationNew.toString() ); /* Offset for I piece */
+    else
+        var offsetArr = srsMap.get( rotationPrev.toString() + rotationNew.toString() ); /* Offset for T, S, Z, J, L piece */ 
+
+    for(var i = 0; i < offsetArr.length; i++) {
+        holdPiece.pieceName = block;
+        holdPiece.xPos += offsetArr[i][0]; /* setting X offset */
+        holdPiece.yPos += offsetArr[i][1]; /* setting Y offset */
+        holdPiece.rotation = rotationNew;  /* Update rotation value */
+        break;
+    }
+}
 /* Funtion to start new Game */
 function newGame() {
     for(var i = 0;i < row; i++)
         for(var j = 0; j < col; j++)
             board[i][j] = boardColour; /* clearing board */
     drawBoard(board);
+    drawPieceBoard(pieceBoard);
+    drawHoldPieceBoard(holdBoard);
     sound.main.loop=true;
     sound.main.volume=0.4;
     sound.main.play();
     piece=newPiece();
     nextPiece=newPiece();
+    drawNextPiece();
     holdPiece=null;
     holdLock=false;
     moveLock=false;
@@ -317,12 +443,15 @@ function swapPiece() {
             holdPiece = piece;
             piece = nextPiece;
             nextPiece = newPiece();
+            drawNextPiece();
         }
         else {
             var temp = piece;
             piece = holdPiece;
             holdPiece = temp;
         }
+        rotateHoldBlock();
+        drawHoldPiece();
         sound.hold.play();
     }
     holdLock = true;    /* Setting swap lock */
@@ -359,6 +488,8 @@ function checkLine() {
             drawBoard(board);
         }
     }
+    document.getElementById("score").innerHTML = lineClear*10;
+    document.getElementById("line").innerHTML = lineClear;
 }
 /* Funtion to drop tetromino continuously */
 function defaultDrop() {
@@ -377,9 +508,12 @@ function defaultDrop() {
         piece.yPos += 1;
     }
     drawPiece();
+    drawNextPiece();
     moveLock=false;
     return true;
 }
 drawBoard(board);
+drawPieceBoard(pieceBoard);
+drawHoldPieceBoard(holdBoard);
 setInterval( defaultDrop, 1000/difficultyLevel);
 
