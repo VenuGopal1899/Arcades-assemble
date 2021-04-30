@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2048</title>
+    <link rel="stylesheet" href="/css/game-2048.css" />
+    <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Cinzel Decorative">
+  </head>
+  <body>
+    <div class = "head">
+        <h2><span id="moveLeft">ARCADES</span> <span id="moveRight">ASSEMBLE</span></h2>
+    </div>
+    <ul>
+        <li><a href="/games/flappy-bird/" class="flappy-bird">Flappy Bird</a></li>
+        <li><a href="#" class="active game-2048">2048</a></li>
+        <li><a href="/games/classic-snake/" class="classic-snake-game">Classic Snake</a></li>
+        <li><a href="/games/tetris/" class="tetris">Tetris</a></li>
+        <li><a href="/games/guess-the-color/" class="guess-the-color">Guess the Color!</a></li>
+        <li><a href="#">Logout</a></li>
+        <li><a href="/games">Return</a></li>
+    </ul>
+    <div class="game-2048-main">
+        <div class="info">
+            <div class="score-counter"
+              style="display: flex; justify-content: space-between; ">
+
+              <button class="score-container display-score" style="margin-left: 10px">
+                <span>Score <span class="score">0</span></span>
+              </button>
+
+              <button class="new-game score-container" style="margin-left: 10px">
+                New Game
+              </button>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <div class="grid">
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            </div>
+        </div>
+
+        <div class="game-2048-over">
+            <span class="game-over"></span>
+        </div>
+    </div>
+
+    <script src="/scripts/game-2048/game-2048.js"></script>
+  </body>
+</html>

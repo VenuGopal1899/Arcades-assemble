@@ -1,0 +1,18 @@
+{
+  "name": "aa",
+  "version": "1.0.0",
+  "description": "A Web Application consisting of 5 Single Player Arcade Games",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "consolidate": "^0.16.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.6",
+    "mustache": "^4.2.0"
+  }
+}
