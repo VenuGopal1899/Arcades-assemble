@@ -1,10 +1,11 @@
 {
-  "name": "aa",
+  "name": "arcade-games",
   "version": "1.0.0",
   "description": "A Web Application consisting of 5 Single Player Arcade Games",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./backend/app.js"
   },
   "keywords": [],
   "author": "",
