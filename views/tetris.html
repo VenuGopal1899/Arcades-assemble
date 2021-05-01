@@ -1,0 +1,73 @@
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav bar</title>
+    <link rel="stylesheet" href="/css/tetris.css">
+    <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="header">
+        <div class = "head">
+            <h2><span id="moveLeft">ARCADES</span> <span id="moveRight">ASSEMBLE</span></h2>
+        </div>
+        <ul>
+            <li><a href="/games/flappy-bird/" class="flappy-bird">Flappy Bird</a></li>
+            <li><a href="/games/game-2048/" class="game-2048">2048</a></li>
+            <li><a href="/games/classic-snake/" class="classic-snake-game">Classic Snake</a></li>
+            <li><a href="#" class="active tetris">Tetris</a></li>
+            <li><a href="/games/guess-the-color/" class="guess-the-color">Guess the Color!</a></li>
+            <li><a href="#">Logout</a></li>
+            <li><a href="/games">Return</a></li>
+        </ul>
+    </div>
+    <div class="tetris-game-code">
+        <div class="container">
+            <div class="game">
+                <canvas id="grid"></canvas>
+            </div>
+            <div class="side-panel">
+                <div class="next box">
+                    <span class="next-text">NEXT</span>
+                    <canvas class="next-coming-block" id="next">
+                    <canvas>
+                </div>
+                <div class="next box">
+                    <span class="next-text">HOLD PIECE</span>
+                    <canvas class="next-coming-block" id="hold">
+                    </canvas>
+                </div>
+                <div class="scores box">
+                    <span class="next-text">SCORES</span>
+                    <div class="scores-value blocks" id="score">0</div>
+                </div>
+                <div class="lines box">
+                    <span class="next-text">LINES</span>
+                    <div class="lines-value blocks" id="line">0</div>
+                </div>
+                <div class="level box">
+                    <span class="next-text">LEVEL</span>
+                    <div class="level-value blocks" id="level">0</div>
+                </div>
+                <div class="button-set">
+                    <button class="buttons-game" id="startgame" onclick="newGame()">Start Game</button>
+                    <br>
+                    <button class="buttons-game" id="Pause" onclick="togglePause()"><span id="toggle-pause-content">Pause</span></button>
+                    <button class="buttons-game" id="End">Options</button>
+                </div>
+            </div>
+        </div>
+        <div class="tetris-game-over">
+            <span id="game-over-tetris"></span>
+        </div>
+    </div>
+    <script src="/scripts/tetris/tetris.js"></script>
+
+</body>
+
+</html>

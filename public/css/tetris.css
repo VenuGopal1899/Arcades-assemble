@@ -1,0 +1,208 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+body .tetris-game-code{
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 736px;
+    margin-top: -14px;
+}
+body .header{
+    background-color: white;
+    padding-top: 1px;
+}
+#grid{
+    margin-top: 10px;
+    border:8px solid rgb(39,60,161);
+    border-radius: 16px;
+    box-shadow: 10px 10px 5px rgb(0, 0, 0);
+}
+.container{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+.side-panel{
+    margin-top: 10px;
+    margin-left: 12px;
+    background: rgb(39,60,161);
+    height: 505px;
+    width: 200px;
+    border: 8px solid rgb(39,60,161);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    box-shadow: 10px 10px 5px rgb(0 0 0);
+}
+.next{
+    height: 25%;
+    /* background: red; */
+}
+.next-text{
+    color: white;
+    font-weight: 700;
+    font-size:17px;
+    font-stretch: semi-expanded;
+    font-family: 'Oswald', sans-serif;
+}
+.next-coming-block
+{
+    background:rgb(10,10,10);
+    border-radius: 4px;
+    width:185px;
+}
+
+.blocks{
+    background:rgb(10,10,10);
+    border-radius: 4px;
+    width:185px;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.scores-value{
+    height:32px;
+}
+.lines-value{
+    height:32px;
+}
+.level-value{
+    height:32px;
+}
+.next-coming-block{
+    height:66px;
+}
+.scores{
+    width: 100px;
+    height: 20%;
+    /* background: red; */
+}
+.lines{
+    width: 100px;
+    height: 20%;
+    /* background: red; */
+}
+.level{
+    width: 100px;
+    height: 100px;
+    /* background: red; */
+}
+.box{
+    margin:10px auto;
+    display: flex;
+    flex-direction: column;
+    width: 190px;
+    align-items: stretch;
+}
+.button-set{
+    width: 185px;
+    height: 20%;
+}
+#startgame{
+    position: relative;
+    left: 11px;
+    width: 175px;
+}
+#pause{
+    position: relative;
+    left: 18px;
+    top: 7px;
+    width: 73px;
+}
+#end {
+    position: relative;
+    left: 30px;
+    top: 7px;
+    width: 73px;
+}
+.buttons-game{
+    font-weight: 500;
+    font-size:15px;
+    font-stretch: semi-expanded;
+    background: rgb(39,60,161);
+    border: none;
+    border:1px solid black;
+    font-stretch: semi-expanded;
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.buttons-game:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transform: scale(1.070);
+    border:2px solid black;
+}
+
+/* Nav bar  */
+.head{
+    background-color: white !important;
+    text-align: -moz-center;
+    font-family: 'Cinzel Decorative';
+    text-align: center;
+    /* padding-left: 3px; */
+    /* line-height: 1.1; */
+}
+h2{
+    font-size: 46px;
+    font-weight: bold;
+    word-spacing: 16px;
+    background: linear-gradient(to right,#bd3121, #1f1c18 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 22px;
+}
+
+ul{
+    list-style-type: none;
+    overflow: hidden;
+    height: 24px;
+    padding: 12px 0px 20px 15px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    font-family: "Montserrat";
+}
+
+li{
+    float: left;
+    padding-left: 20px;
+    margin-right: 20px;
+}
+
+li:nth-last-child(2), li:last-child{
+    float: right;
+}
+
+li a{
+    display: block;
+    text-decoration: none;
+    font-size: 25px;
+    color: #0275d8;
+}
+
+.active, a:hover {
+    color: #d9534f ;
+}
+
+a:hover{
+    color: #292b2c;
+}
+
+.game {
+    display: grid;
+    justify-content: center;
+}
+
+.tetris-game-over{
+    margin-left: 545px;
+    font-size: 40px;
+    color: rgb(255, 0, 128);
+    padding-top: 20px;
+}
