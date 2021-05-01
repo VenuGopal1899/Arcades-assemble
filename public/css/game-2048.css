@@ -1,0 +1,150 @@
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  font-size: larger;
+  font: "Clear Sans", "Helvetica Neue", "Arial", "sans-serif";
+  margin: 0;
+  padding: 0;
+}
+
+.game-2048-main{
+    margin-top: 70px;
+}
+.info {
+  display: flex;
+  justify-content: center;
+}
+
+/* .game-name {
+  text-align: center;
+  height: 3.4rem;
+  width: 5rem;
+  border-radius: 8%;
+
+} */
+
+ul#list_info {
+  min-width: auto;
+  list-style: none;
+}
+#list_info li {
+  margin: 10px;
+  float: left;
+}
+.score-container {
+  text-align: center;
+  height: 3.4rem;
+  width: 165px;
+  border-radius: 8%;
+  background-color: #78c5f1;
+  font-size: 18px;
+}
+.display-score{
+    padding-right: 20px;
+}
+.wrapper {
+  width: 400px;
+  height: 400px;
+  margin: 10px auto;
+  background-color: #219dce;
+}
+
+.grid {
+  width: 100%;
+  position: relative;
+}
+
+.cell {
+  width: 90px;
+  height: 90px;
+  margin: 8px 8px 0 0;
+  background-color: #cdf0f1;
+  float: left;
+}
+
+.cell:nth-child(4n + 1) {
+  margin-left: 8px;
+}
+
+.number {
+  position: absolute;
+  height: 90px;
+  width: 90px;
+  font-size: 42px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 82px;
+  background-color: whitesmoke;
+  color: #afa192;
+  transition: all 0.4s;
+}
+
+.new-game {
+  cursor: pointer;
+}
+
+/* Nav bar */
+.head{
+  /* font-family: "Montserrat"; */
+
+  background-color: white !important;
+  text-align: -moz-center;
+  font-family: 'Cinzel Decorative';
+  text-align: center;
+  /* line-height: 1.1; */
+}
+h2{
+  font-size: 46px;
+  font-weight: bold;
+  word-spacing: 16px;
+  background: linear-gradient(to right,#bd3121, #1f1c18 );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 22px;
+  margin-top: 38px;
+}
+
+ul{
+  list-style-type: none;
+  font-family: "Montserrat";
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 30px;
+  padding: 12px 0px 20px 15px;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  font-family: "Montserrat";
+}
+
+li{
+  float: left;
+  padding-left: 20px;
+  margin-right: 20px;
+}
+
+li:nth-last-child(2), li:last-child{
+  float: right;
+}
+
+li a{
+  display: block;
+  text-decoration: none;
+  font-size: 25px;
+  color: #0275d8;
+}
+
+.active, a:hover {
+  color: #d9534f ;
+}
+
+a:hover{
+  color: #292b2c;
+}
+
+.game-over{
+    color: red;
+    font-size: 50px;
+    margin-left: 625px;
+}
