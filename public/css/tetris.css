@@ -199,3 +199,10 @@ a:hover{
     display: grid;
     justify-content: center;
 }
+
+.tetris-game-over{
+    margin-left: 545px;
+    font-size: 40px;
+    color: rgb(255, 0, 128);
+    padding-top: 20px;
+}
