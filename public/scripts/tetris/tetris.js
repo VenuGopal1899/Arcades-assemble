@@ -415,6 +415,9 @@ function newGame() {
     for(var i = 0;i < row; i++)
         for(var j = 0; j < col; j++)
             board[i][j] = boardColour; /* clearing board */
+
+    document.getElementById("game-over-tetris").innerHTML = "";
+    document.getElementById("startgame").innerHTML = "Start New Game";
     drawBoard(board);
     drawPieceBoard(pieceBoard);
     drawHoldPieceBoard(holdBoard);
@@ -432,6 +435,8 @@ function newGame() {
 }
 /* Funtion to end current game */
 function gameOver() {
+    document.getElementById("game-over-tetris").innerHTML = "Game Over!";
+    document.getElementById("startgame").innerHTML = "Play Again ?";
     score=lineClear*10;
     if( score > highScore)
         highScore = score;
