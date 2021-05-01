@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const engines = require('consolidate');
 const path = require('path');
+const dotenv = require('dotenv');
 const port = 4000;
 
 // Remove Deprecation warnings
@@ -10,11 +11,12 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
+dotenv.config();
 // Setup Express app
 const app = express();
 
 // Connect to remote MongoDB cluster
-const dbURI = 'mongodb+srv://batch6:sapient-batch-6@12@nodejs.knt7p.mongodb.net/test-game?retryWrites=true&w=majority';
+const dbURI = process.env.MONGODB_URI;
 
 mongoose.connect(dbURI,{useNewUrlParser: true,useUnifiedTopology:true})
 .then((result) => {
