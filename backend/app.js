@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const engines = require('consolidate');
 const path = require('path');
+const port = 4000;
 
 // Remove Deprecation warnings
 mongoose.set('useNewUrlParser', true);
@@ -12,8 +13,19 @@ mongoose.set('useUnifiedTopology', true);
 // Setup Express app
 const app = express();
 
-// Connect to Local MongoDB
-mongoose.connect('mongodb://localhost:27017/pjpbatch6');
+// Connect to remote MongoDB cluster
+const dbURI = 'mongodb+srv://batch6:sapient-batch-6@12@nodejs.knt7p.mongodb.net/test-game?retryWrites=true&w=majority';
+
+mongoose.connect(dbURI,{useNewUrlParser: true,useUnifiedTopology:true})
+.then((result) => {
+    console.log("You are now connected successfully to database")
+    app.listen(port, () => {
+        console.log('Now listening on port ' + port );
+    })
+})
+.catch((err)=> {   // Catch error if not connected to database
+   console.log(err);
+})
 mongoose.Promise = global.Promise;
 
 // Add a Middleware to serve static files
@@ -24,9 +36,6 @@ app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 
 // listen for requests
-app.listen(4000, () => {
-    console.log('Now listening for requests');
-})
 
 app.get('/', (req, res) => res.redirect('/games'));
 app.get('/games', (req, res) => res.render('homepage.html'));
