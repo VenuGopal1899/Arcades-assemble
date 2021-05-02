@@ -1,0 +1,296 @@
+html, body{
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #232323;
+  margin: 0;
+  font-family: "Montserrat", "Avenir";
+  overflow: hidden;
+}
+@keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+}
+.square {
+  width: 30%;
+  background-color: #232323;
+  padding-bottom: 30%;
+  float: left;
+  margin: 1.66%;
+  border-radius: 15%;
+  transition: background 0.6s;
+  -webkit-animation: rotate-center 0.6s ease-in-out;
+  -webkit-transition: background 0.6s;
+  -moz-transition: background 0.6s;
+}
+
+#container {
+  margin: 20px auto;
+  max-width: 35%;
+  background-color: #232323;
+}
+
+h1 {
+  text-align: center;
+  line-height: 1;
+  font-weight: normal;
+  height: 20%;
+  color: white;
+  background: steelblue;
+  margin: 0;
+  text-transform: uppercase;
+  padding: 20px 0;
+}
+
+#colorDisplay {
+  font-size: 150%;
+}
+
+#message {
+  /*border-radius: 10%;*/
+  /*font-weight: 3px;*/
+  display: inline-block;
+  width: 20%;
+  text-transform: uppercase;
+  height: 100%;
+  font-weight: 700;
+  color: steelblue;
+  letter-spacing: 1px;
+  font-size: inherit;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  outline: none;
+}
+
+#stripe {
+  background: white;
+  height: 30px;
+  text-align: center;
+  color: black;
+}
+
+.selected {
+  color: white;
+  background: steelblue;
+}
+
+button {
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  height: 100%;
+  font-weight: 700;
+  color: steelblue;
+  letter-spacing: 1px;
+  font-size: inherit;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  outline: none;
+}
+
+button:hover {
+  color: white;
+  background: steelblue;
+}
+
+/*//////Nav-bar code integrated/////////*/
+body .head{
+  /* font-family: "Montserrat"; */
+
+  background-color: white !important;
+  text-align: center;
+  font-family: 'Cinzel Decorative';
+  padding-top: 1px;
+}
+h2{
+    font-size: 46px;
+    font-weight: bold;
+    word-spacing: 16px;
+    background: linear-gradient(to right,#bd3121, #1f1c18 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 22px;
+    margin-top: 37px;
+}
+
+ul{
+    list-style-type: none;
+    font-family: "Montserrat";
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 30%;
+    padding: 12px 0px 20px 15px;
+    background-color: whitesmoke;
+    border-radius: 20px;
+    font-family: "Montserrat";
+}
+
+li{
+    float: left;
+    padding-left: 20px;
+    margin-right: 20px;
+}
+
+li:nth-last-child(2), li:last-child{
+    float: right;
+}
+
+li a{
+    display: block;
+    text-decoration: none;
+    font-size: 25px;
+    color: #0275d8;
+}
+
+.active, a:hover {
+    color: #d9534f ;
+}
+
+a:hover{
+    color: #292b2c;
+}
+
+/*/////trophy icon//////////*/
+
+.leaderboard_pop {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-animation: wobble-hor-bottom 5s both;
+          animation: wobble-hor-bottom 5s both;
+          animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  10% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+            transform: translateX(-30px) rotate(-6deg);
+  }
+  15% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+            transform: translateX(15px) rotate(6deg);
+  }
+  20% {
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+            transform: translateX(-15px) rotate(-3.6deg);
+  }
+  25% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+            transform: translateX(9px) rotate(2.4deg);
+  }
+  30% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+            transform: translateX(-6px) rotate(-1.2deg);
+  }
+  40% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+}
+@keyframes wobble-hor-bottom {
+  0%,
+  100% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+  }
+  10% {
+    -webkit-transform: translateX(-30px) rotate(-6deg);
+            transform: translateX(-30px) rotate(-6deg);
+  }
+  15% {
+    -webkit-transform: translateX(15px) rotate(6deg);
+            transform: translateX(15px) rotate(6deg);
+  }
+  20% {
+    -webkit-transform: translateX(-15px) rotate(-3.6deg);
+            transform: translateX(-15px) rotate(-3.6deg);
+  }
+  25% {
+    -webkit-transform: translateX(9px) rotate(2.4deg);
+            transform: translateX(9px) rotate(2.4deg);
+  }
+  30% {
+    -webkit-transform: translateX(-6px) rotate(-1.2deg);
+            transform: translateX(-6px) rotate(-1.2deg);
+  }
+  40% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+}
+
+.hide{
+  visibility: hidden;
+}
+.img_wrap:hover .hide {
+  visibility: visible;
+  opacity: 1;
+  color: white;
+  font-weight: bold;
+}
+
+
+/*////leaderboard popup/////////*/
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #0099ff;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 70%;
+  align-self: center;
+  border-radius: 10%;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
