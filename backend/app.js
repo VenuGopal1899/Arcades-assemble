@@ -46,3 +46,5 @@ app.get('/games/tetris', (req, res) => res.render('tetris.html'));
 app.get('/games/game-2048', (req, res) => res.render('game-2048.html'));
 app.get('/games/flappy-bird', (req, res) => res.render('flappy-bird.html'));
 app.get('/games/classic-snake', (req, res) => res.render('classic-snake.html'));
+app.get('/signup', (req, res) => res.render('signup.html'));
+app.get('/login', (req, res) => res.render('login.html'));
