@@ -37,6 +37,121 @@ h2{
     color: white;
 }
 
+.container{
+    width: 100%;
+    padding-bottom: 3%;
+  /* background-color: #232323; */
+  /* border-color: white;
+  border-style: solid; */
+  /* padding-bottom: 10%; */
+  /* float: left; */
+  /* margin: 1.66%; */
+  /* border-radius: 15%; */
+  /* margin: auto; */
+  /* vertical-align: middle; */
+  /* align-self:center; */
+  height: 30%;
+  /* margin: 10px 10px 10px 10px; */
+  /* max-height: 35%; */
+  position: fixed;
+  right: 0;
+  left: auto;
+  
+  text-align: center;
+  /* margin: auto; */
+  display: flex;
+  justify-self:auto;
+  justify-content: center;
+  /* bottom: 0; */
+  /* margin-bottom: 10px; */
+  /* // &:hover .square:not(:hover) {
+  //   filter: grayscale(100%);
+
+  //   &::after {
+  //     background-color: rgba(#000, 0.5);
+  //   }
+  // } */
+}
+.scores:hover .square:not(:hover)
+{
+  filter:sepia(75%);
+}
+.square:hover{
+  
+    /* ////// */
+  border-radius: 15%;
+  /* border-top-right-radius: 15%;
+  border-top-left-radius: 15%; */
+  animation-name: example;
+  animation-duration: 0.25s;
+  border-bottom: 8px solid rgb(47, 166, 187);
+  border-right: 9px solid rgb(47, 166, 187);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.35), 0 10px 10px rgba(0,0,0,0.45);
+}
+.square
+.img{
+  object-fit: cover;
+  /* margin-bottom: 20px; */
+}
+.image {
+  /* display: block; */
+  width: 100%;
+  height: 100%;
+  /* height: inherit; */
+  object-fit: contain;
+  border-radius: 15%;
+  border-style: solid;
+  border-width: 5px;
+  border-color: ivory;
+  object-fit: fill;
+}
+.text{
+    vertical-align: middle;
+    /* border-color: ivory;
+    border-style: solid; */
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* left: auto; */
+    position:absolute;
+    text-align:center;
+    /* line-height: 1.5; */
+    /* align-self: center; */
+    /* justify-content: center; */
+    /* text-indent:0px; */
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    /* font-weight: bolder; */
+    color: white;
+    font-size: 1.5em;
+    font-family: Verdana;
+    /* background-color: lawngreen; */
+    /* transition: .5s ease; */
+  }
+
+.square{
+  position: relative;
+    float: left;
+    width: 20%;
+    /* border-color: black;
+    border-style: solid; */
+    /* max-height: 60%; */
+    margin: 0 auto;
+    height:100%;
+    /* padding: 0; */
+    /* background: linear-gradient(to bottom, #1d5e69, #000000); */
+    border-radius: 15%;
+    display: flex;
+    justify-self: auto;
+    align-content: center;
+    justify-content: center;
+    /* margin-bottom: 50px; */
+    /* align-content: center; */
+
+}
+
 .games-logos{
     width: 100%;
     display: inline-flex;
@@ -45,7 +160,7 @@ h2{
 
 .game-logo{
     width: 20%;
-    margin-right: 2px;
+    margin-right: 5px;
 }
 
 .game-2048{

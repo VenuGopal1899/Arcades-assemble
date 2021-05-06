@@ -1,3 +1,6 @@
+var modal = document.querySelector("#myModal");
+var btn = document.querySelector(".leaderboard_pop");
+
 document.querySelectorAll("button").forEach( function(item) {
     item.addEventListener('focus', function() {
         this.blur();
@@ -523,6 +526,19 @@ function defaultDrop() {
     drawNextPiece();
     moveLock=false;
     return true;
+}
+/////leaderboard pop up///////////
+btn.addEventListener("click", function(){
+	modal.style.display = "block";
+})
+var span = document.getElementsByClassName("close")[0];
+span.addEventListener("click", function(){
+	modal.style.display = "none";
+})
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
 drawBoard(board);
 drawPieceBoard(pieceBoard);

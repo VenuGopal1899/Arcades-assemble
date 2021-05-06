@@ -48,3 +48,4 @@ app.get('/games/flappy-bird', (req, res) => res.render('flappy-bird.html'));
 app.get('/games/classic-snake', (req, res) => res.render('classic-snake.html'));
 app.get('/signup', (req, res) => res.render('signup.html'));
 app.get('/login', (req, res) => res.render('login.html'));
+app.get('/gamerProfile', (req, res) => res.render('gamerProfile.html'));
