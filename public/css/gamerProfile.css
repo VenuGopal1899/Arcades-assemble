@@ -1,0 +1,226 @@
+body {
+    background-image: 
+    linear-gradient(rgba(31, 28, 24, 1), rgba(252, 10, 10, 0.2)),
+    url('/resources/gamerProfile/images/gamer2-mini.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 20px;
+    font-family: Verdana, sans-serif;
+
+}
+h1{
+    text-transform: uppercase;
+    font-size:50px;
+    font-family: verdana;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 1px rgb(47, 166, 187),
+    1px 2px 1px rgb(47, 166, 187),
+    1px 3px 1px rgb(47, 166, 187),
+    1px 4px 1px rgb(47, 166, 187),
+    1px 5px 1px rgb(47, 166, 187),
+    1px 6px 1px rgb(47, 166, 187),
+    1px 7px 1px rgb(47, 166, 187),
+    1px 8px 1px rgb(47, 166, 187),
+    1px 9px 1px rgb(47, 166, 187),
+    1px 10px 1px rgb(47, 166, 187),
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+}
+.exit a{
+  color: white;
+  text-decoration: none;
+}
+.exit{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-size: 3em;
+    cursor: pointer;
+}
+
+.container{
+    padding-top: 3%;
+    width: 35%;
+    padding-bottom: 7%;
+    position: relative;
+    border-radius: 15%;
+    margin: auto; 
+    text-align: center;
+    max-height: 15%;
+    vertical-align: middle;
+ } 
+ 
+.info{
+    border-radius: 15%;
+    position: relative;
+    text-align: left;
+    align-self:center;
+    font-family: Verdana;
+    font-size: 1.2em;
+    color: #232323;
+}
+.info p{
+    font-size: 1.5em;
+    color: whitesmoke;
+}
+.info span{
+    font-size: 1em;
+    line-height: 1.6;
+    background: linear-gradient(to right, #ffffff, rgb(47, 166, 187));
+    border-radius: 10px;
+    padding: 3px;
+}
+.scores{
+    width: 100%;
+    padding-bottom: 3%;
+    height: 30%;
+    position: fixed;
+    right: 0;
+    left: auto;
+    text-align: center;
+    display: flex;
+    justify-self:auto;
+    justify-content: center;
+    bottom: 0;
+}
+
+.text{
+    vertical-align: middle;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position:absolute;
+    text-align:center;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 1.5em;
+    font-family: Verdana;
+}
+
+.scores:hover .square:not(:hover)
+{
+    filter:sepia(75%);
+}
+
+.square:hover .text{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+.avatar img{
+    mix-blend-mode: multiply;
+    background: transparent;
+
+}
+.square:hover{
+    border-radius: 15%;
+    animation-name: example;
+    animation-duration: 0.25s;
+    border-bottom: 8px solid rgb(47, 166, 187);
+    border-right: 9px solid rgb(47, 166, 187);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.35), 0 10px 10px rgba(0,0,0,0.45);
+}
+.square:hover .image{
+    opacity: 0.3;
+}
+.square
+.img{
+    object-fit: cover;
+}
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 15%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: ivory;
+    object-fit: fill;
+}
+
+.square{
+    position: relative;
+    float: left;
+    width: 17%;
+    margin: 0 auto;
+    height:100%;
+    border-radius: 15%;
+    display: flex;
+    justify-self: auto;
+    align-content: center;
+    justify-content: center;
+}
+
+.avatar{
+    -moz-animation: flip-scale-up-ver 0.5s linear both;;
+    -webkit-animation: flip-scale-up-ver 0.5s linear both;
+    animation: flip-scale-up-ver 0.5s linear both;
+    animation-delay: 1s;
+    width: 35%;
+    border-color: white;
+    border-style: solid;
+    float: left;
+    border-radius: 15%;
+    vertical-align: middle;
+    align-self:center;
+    margin: auto;
+    margin-right: 5px;
+    text-align: center;
+
+}
+
+
+@-webkit-keyframes flip-scale-up-ver {
+    0% {
+      -webkit-transform: scale(1) rotateY(0);
+              transform: scale(1) rotateY(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateY(90deg);
+              transform: scale(2) rotateY(90deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateY(180deg);
+              transform: scale(1) rotateY(180deg);
+    }
+  }
+  @keyframes flip-scale-up-ver {
+    0% {
+      -webkit-transform: scale(1) rotateY(0);
+              transform: scale(1) rotateY(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateY(90deg);
+              transform: scale(2) rotateY(90deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateY(180deg);
+              transform: scale(1) rotateY(180deg);
+    }
+  } 
+  @keyframes example {
+    0%   {
+      border-bottom: 2px solid rgb(255, 255, 255);
+      border-right: 3px solid rgb(255, 255, 255);
+    }
+    25%  {
+      border-bottom: 4px solid rgb(67, 227, 255);
+      border-right: 5px solid rgb(67, 227, 255);
+    }
+    50%  {
+      border-bottom: 6px solid rgb(55, 193, 218);
+      border-right: 7px solid rgb(55, 193, 218);
+    }
+    100% {
+      border-bottom: 8px solid rgb(47, 166, 187);
+      border-right: 9px solid rgb(47, 166, 187);
+    }
+}
