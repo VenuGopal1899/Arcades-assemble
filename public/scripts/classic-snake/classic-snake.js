@@ -516,3 +516,16 @@ window.onclick = function(event) {
 
 init();
 startMusic();
+
+function logout(){
+  if(localStorage.getItem("JWT")){
+      localStorage.removeItem("JWT");
+  }
+  window.location.href = "http://localhost:4000/login";
+}
+
+function checkLoginStatus(){
+  if(!localStorage.getItem("JWT")){
+    document.getElementById("login-btn").innerHTML = "Login";
+  }
+}

@@ -25,6 +25,18 @@ function init(){
 	reset();
 }
 
+function logout(){
+    if(localStorage.getItem("JWT")){
+        localStorage.removeItem("JWT");
+    }
+    window.location.href = "http://localhost:4000/login";
+}
+
+function checkLoginStatus(){
+	if(!localStorage.getItem("JWT")){
+		document.getElementById("login-btn").innerHTML = "Login";
+	}
+}
 function setupModeButtons(){
 	for(var i = 0; i < modeButtons.length; i++){
 		modeButtons[i].addEventListener("click", function(){
@@ -60,7 +72,7 @@ function setupSquares(){
 				messageDisplay.textContent = "SCORE : " + score;
 				sound.select.play();
 			}
-			
+
 		});
 	}
 }
