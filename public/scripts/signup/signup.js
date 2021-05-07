@@ -39,7 +39,7 @@ async function signupUser(e){
         countDown();
     } else {
         var msg = Object.keys(result.error)[0].toUpperCase();
-        document.getElementById("err-message").innerHTML = msg + ' already in use.';
+        document.getElementById("err-message").innerHTML = ((msg==="USEREMAIL")?'E-mail':msg)+' already in use.'
     }
 }
 

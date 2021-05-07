@@ -24,8 +24,10 @@ app.use(express.json());
 
 // Connect to remote MongoDB cluster
 
-// const dbURI = process.env.MONGODB_URI;
-const dbURI = 'mongodb://localhost:27017/login-app-db';
+const dbURI = process.env.MONGODB_URI;
+
+// Local MongoDB Server
+// const dbURI = 'mongodb://localhost:27017/login-app-db';
 
 mongoose.connect(dbURI)
 const db = mongoose.connection
