@@ -1,0 +1,272 @@
+@font-face {
+    font-family: 'black_jackregular';
+    src: url('../resources/login/fonts/blackjack-webfont.eot');
+    src: url('../resources/login/fonts/blackjack-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../resources/login/fonts/blackjack-webfont.woff') format('woff'),
+         url('../resources/login/fonts/blackjack-webfont.ttf') format('truetype'),
+         url('../resources/login/fonts/blackjack-webfont.svg#black_jackregular') format('svg');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body {
+	background-image: url("../resources/login/images/bg-blurred.png");
+    height: 200px;
+    width: 200px;
+	font-family: arial;
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+/*<========CSS Reset Properties========>*/
+h1, p, form, input, div, img, label {
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: rgba(220,220,220,1);
+	padding: 0;
+	margin: 0;
+}
+
+/*<===============================================>*/
+/*<========Top to Bottom ordered CSS rules========>*/
+.container {
+	overflow: hidden;
+}
+.loginForm {
+	margin: 1em auto 0 auto;
+	width: 300px;
+	border: 10px solid white;
+	padding: 20px;
+	width: 22.8em;
+	height: 200px;
+}
+header h1 {
+    color: rgba(240,240,240,1);
+	font-family: 'Bungee Shade', cursive;;
+	font-weight: bold;
+	font-size: 8em;
+	font-variant: small-caps;
+	line-height: 1.5;
+	padding: 0.2em 0 0 0;
+	height: 1.5em;
+	width: 100%;
+	text-align: center;
+}
+
+header h3 {
+         color: rgba(240,240,240,1);
+	font-family: 'black_jackregular';
+	font-weight: bold;
+	font-size: 32px;
+	font-variant: small-caps;
+	line-height: 0.5;
+	padding: 0.2em 0 0 0;
+	height: 0.5em;
+	width: 100%;
+	text-align: center;
+
+}
+input {
+	background: rgba(228,232,243, 0.8) url("../images/sprite.png") ;
+	background-size: 20px 80px;
+	background-position: 0.5em 0.6em;
+	border: none;
+	color: rgba(80,80,80,1);
+	padding: 0 0 0 4em;
+	margin: 0 0 1em 0;
+	width: 20em;
+	height: 2.8em;
+	outline: none;
+	-webkit-transition: background-color 0.4s;
+	transition: background-color 0.4s;
+}
+input:hover {
+	background-color: rgba(255,255,255, 0.8);
+}
+input:focus {
+	background-color: rgba(255,255,255, 0.8);
+}
+
+.profile {
+	height: 8em;
+	width: 8.5em;
+	margin: 0 0 2em 7em;
+}
+.password {
+	background-position: 0.5em -3.8em;
+}
+.recovery {
+	display: block;
+	margin: -10.3em 0 0 14.5em;
+	color: black;
+}
+.recovery:hover {
+	text-decoration: underline;
+}
+.login-signup{
+	display: flow-root;
+	margin-top: -25px;
+}
+.submit {
+	background: rgba(35,35,35, 0.6);
+	color: rgba(220,220,220,1);
+	padding: 0 0 0 0;
+	margin: 10px -55px 0 39px;
+	width: 100px;
+	text-transform: uppercase;
+	cursor: pointer;
+	-webkit-transition: background 0.4s;
+	transition: background 0.4s;
+}
+.submit:hover {
+	background: rgba(223,32,77, 0.8);
+}
+.submit:focus {
+	background: rgba(223,32,77, 0.8);
+}
+.submit1 {
+	background: rgba(35,35,35, 0.6);
+	color: rgba(220,220,220,1);
+	padding: 0 0 0 0;
+	margin: 2.5em 0 0 7em;
+	width: 8em;
+	text-transform: uppercase;
+	cursor: pointer;
+	-webkit-transition: background 0.4s;
+	transition: background 0.4s;
+}
+.submit1:hover {
+	background: rgba(223,32,77, 0.8);
+}
+.submit1:focus {
+	background: rgba(223,32,77, 0.8);
+}
+
+.err-message{
+	text-align: center;
+	color: palegoldenrod;
+	font-size: 20px;
+	padding-top: 10px;
+}
+#dashboard{
+	width: 250px;
+	margin-left: 37px;
+}
+.games-dashboard{
+	text-align: center;
+	margin-left: -30px;
+}
+/*<============================================================>*/
+/*<========Media queries for other displays and devices========>*/
+@media only screen and (max-width: 480px) {
+	header h1 {
+		font-size: 4em;
+	}
+	.loginForm {
+		margin: 0.5em auto 0 auto;
+	}
+}
+/*<============================================================>*/
+
+/* Modal Container */
+.modal-container {
+	background-color: rgba(0,0,0,0.3);
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	top:0;
+	left:0;
+	height:100vh;
+	width: 100vw;
+	pointer-events: none;
+	transition: opacity 0.2s ease-in-out;
+}
+#open {
+    background: #47a386;
+    border:0;
+    border-radius: 5px;
+    box-shadow:  0 2px 4px rgba(0,0,0,0.2);
+    color:#fff;
+    padding:10px 25px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.modal-container.show {
+    pointer-events: auto;
+    opacity: 1;
+}
+.modal {
+	background-color: #fff;
+	width:400px;
+	max-width:100%;
+	box-shadow:  0 10px 10px rgba(0,0,0,0.2);
+	border-radius: 5px;
+	padding: 30px 50px;
+	text-align: center;
+	position: relative;
+	margin-top: -110px;
+	height: 205px;
+}
+.modal h1 {
+    margin:0;
+    font-family: 'Book Antiqua';
+}
+.modal p {
+    font-size: 20px;
+    opacity: 0.7;
+    font-family: 'Corbel';
+    font-weight: 600;
+}
+#Yes {
+    margin-right: 30px;
+    transition: all 0.1s ease;
+    background: #47a386;
+    border:0;
+    border-radius: 5px;
+    box-shadow:  0 2px 4px rgba(0,0,0,0.2);
+    color:#fff;
+    padding:10px 25px;
+    font-size: 14px;
+    cursor: pointer;
+}
+#No {
+    margin-left: 30px;
+    transition: all 0.1s ease;
+    background: #47a386;
+    border:0;
+    border-radius: 5px;
+    box-shadow:  0 2px 4px rgba(0,0,0,0.2);
+    color:#fff;
+    padding:10px 25px;
+    font-size: 14px;
+    cursor: pointer;
+}
+#Yes:hover {
+    transform: scale(1.070);
+    box-shadow:  0 2px 4px rgba(0,0,0,0.2);
+}
+#No:hover {
+    transform: scale(1.070);
+    box-shadow:  0 2px 4px rgba(0,0,0,0.2);
+}
+.modal-container .close {
+position: absolute;
+right:10px;
+top:20px;
+font-size: 32px;
+background: none;
+border: none;
+outline: none;
+cursor: pointer;
+}
+.modal-container .close:hover {
+    color:#47a386;
+}

@@ -1,0 +1,196 @@
+@font-face {
+    font-family: 'black_jackregular';
+    src: url('../resources/signup/fonts/blackjack-webfont.eot');
+    src: url('../resources/signup/fonts/blackjack-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../resources/signup/fonts/blackjack-webfont.woff') format('woff'),
+         url('../resources/signup/fonts/blackjack-webfont.ttf') format('truetype'),
+         url('../resources/signup/fonts/blackjack-webfont.svg#black_jackregular') format('svg');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body {
+	background-image: url("../resources/signup/bg-blurred.png");
+    height: 200px;
+    width: 200px;
+	font-family: arial;
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+/*<========CSS Reset Properties========>*/
+h1, p, form, input, div, img, label {
+	padding: 0;
+	margin: 0;
+}
+a {
+	text-decoration: none;
+	color: rgba(220,220,220,1);
+	padding: 0;
+	margin: 0;
+}
+
+/*<===============================================>*/
+/*<========Top to Bottom ordered CSS rules========>*/
+.container {
+	overflow: hidden;
+}
+#signupForm {
+	margin: 1em auto 0 auto;
+	width: 300px;
+	border: 10px solid white;
+	padding: 30px;
+	width: 320px;
+	height: 440px;
+
+}
+#verify-email{
+	display: none;
+	text-align: center;
+	font-size: 28px;
+	padding-top: 170px;
+	color: white;
+	font-weight: bold;
+}
+#redirect-login{
+	text-align: center;
+	font-size: 22px;
+	color: white;
+	display: none;
+	padding-top: 40px;
+}
+#countDown{
+	color: coral;
+}
+
+header h1 {
+    color: rgba(240,240,240,1);
+	font-family: 'Bungee Shade', cursive;;
+	font-weight: bold;
+	font-size: 8em;
+	font-variant: small-caps;
+	line-height: 1.5;
+	padding: 0.2em 0 0 0;
+	height: 1.5em;
+	width: 100%;
+	text-align: center;
+}
+
+header h3 {
+    color: rgba(240,240,240,1);
+	font-family: 'black_jackregular';
+	font-weight: bold;
+	font-size: 32px;
+	font-variant: small-caps;
+	line-height: 0.5;
+	padding: 0.2em 0 0 0;
+	height: 0.5em;
+	width: 100%;
+	text-align: center;
+
+}
+input {
+	/* background: rgba(228,232,243, 0.8) url("../images/sprite.png") ; */
+	background-size: 20px 80px;
+	background-position: 0.5em 0.6em;
+	border: none;
+	color: rgba(80,80,80,1);
+	padding: 0 0 0 4em;
+	margin: 0 0 1em 0;
+	width: 20em;
+	height: 2.8em;
+	outline: none;
+	-webkit-transition: background-color 0.4s;
+	transition: background-color 0.4s;
+}
+input:hover {
+	background-color: rgba(255,255,255, 0.8);
+}
+input:focus {
+	background-color: rgba(255,255,255, 0.8);
+}
+
+.profile {
+	height: 8em;
+	width: 8.5em;
+	margin: 0 0 2em 7em;
+}
+.password {
+	background-position: 0.5em -3.8em;
+}
+.recovery {
+	display: block;
+	margin: -10.3em 0 0 14.5em;
+	color: black;
+}
+.recovery:hover {
+	text-decoration: underline;
+}
+
+.submit {
+	background: rgba(35,35,35, 0.6);
+	color: rgba(220,220,220,1);
+	padding: 0 0 0 0;
+	margin: 10px 0 0 7em;
+	width: 8em;
+	text-transform: uppercase;
+	cursor: pointer;
+	-webkit-transition: background 0.4s;
+	transition: background 0.4s;
+}
+.submit:hover {
+	background: rgba(223,32,77, 0.8);
+}
+.submit:focus {
+	background: rgba(223,32,77, 0.8);
+}
+.submit1 {
+	background: rgba(35,35,35, 0.6);
+	color: rgba(220,220,220,1);
+	padding: 0 0 0 0;
+	margin: 2.5em 0 0 7em;
+	width: 8em;
+	text-transform: uppercase;
+	cursor: pointer;
+	-webkit-transition: background 0.4s;
+	transition: background 0.4s;
+}
+.submit1:hover {
+	background: rgba(223,32,77, 0.8);
+}
+.submit1:focus {
+	background: rgba(223,32,77, 0.8);
+}
+
+.account-exists{
+	font-size: 18px;
+	text-align: center;
+	padding-top: 25px;
+	color: white;
+}
+
+.account-exists a:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.err-message{
+	text-align: center;
+	color: palegoldenrod;
+	font-size: 20px;
+	padding-top: 10px;
+}
+/*<============================================================>*/
+/*<========Media queries for other displays and devices========>*/
+@media only screen and (max-width: 480px) {
+	header h1 {
+		font-size: 4em;
+	}
+	.loginForm {
+		margin: 0.5em auto 0 auto;
+	}
+}
+/*<============================================================>*/

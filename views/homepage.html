@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="/css/homepage.css">
     <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Cinzel Decorative">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="/scripts/homepage.js"></script>
+    <script src="/scripts/homepage/homepage.js"></script>
+    <script src="/scripts/homepage/homepage.js"></script>
 </head>
 
-<body>
+<body onload="checkLoginStatus()">
     <div class = "head">
 		<h2><span id="moveLeft">ARCADES</span> <span id="moveRight">ASSEMBLE</span></h2>
 	</div>
-    <div class="nav-bar">
+    <div id="nav-bar">
         <ul>
-            <li><a href="#">Account</a></li>
-            <li><a href="#">Sign Out <i class="fa fa-sign-out" style="font-size:24px"></i></a></li>
+            <li><a id="gamer-profile" href="/gamerProfile">Account</a></li>
+            <li onclick="logout()"><a id="sign-out" href="/login">Sign Out <i class="fa fa-sign-out" style="font-size:24px"></i></a></li>
         </ul>
     </div>
-
     <div class="games-nav-bar">
         <a class="game flappy-bird" href="/games/flappy-bird/">Flappy Bird</a>
         <a class="game game-2048" href="/games/game-2048/">2048</a>
@@ -28,12 +28,22 @@
         <a class="game tetris" href="/games/tetris/">Tetris</a>
         <a class="game guess-the-color" href="/games/guess-the-color/">Guess the Color!</a>
     </div>
-    <div class="games-logos">
-        <img class="game-logo flappy-bird-logo" src="/resources/homepage/flappybird.png">
-        <img class="game-logo game-2048-logo" src="/resources/homepage/2048.png">
-        <img class="game-logo classic-snake-game-logo" src="/resources/homepage/snake.png">
-        <img class="game-logo tetris-logo" src="/resources/homepage/tetris.png">
-        <img class="game-logo guess-the-color-logo" src="/resources/homepage/guess-the-color.jpg">
+    <div class="container">
+        <div class="square">
+            <img src="/resources/homepage/flappybird.png" alt="Avatar" class="image">
+        </div>
+        <div class="square">
+            <img src="/resources/homepage/2048.png" alt="Avatar" class="image">
+        </div>
+        <div class="square">
+            <img src="/resources/homepage/snake.png" alt="Avatar" class="image">
+        </div>
+        <div class="square">
+            <img src="/resources/homepage/tetris.jpg" alt="Avatar" class="image">
+        </div>
+        <div class="square">
+            <img src="/resources/homepage/guess-the-color.jpg" alt="Avatar" class="image">
+        </div>
     </div>
 </body>
 </html>

@@ -13,6 +13,10 @@ var score = 0;
 var maxScore = 100;
 var alreadyWon = false;
 
+const sound={
+    select: new Audio('../../resources/colorGame/sounds/select.mp3')
+}
+
 init();
 
 function init(){
@@ -21,6 +25,18 @@ function init(){
 	reset();
 }
 
+function logout(){
+    if(localStorage.getItem("JWT")){
+        localStorage.removeItem("JWT");
+    }
+    window.location.href = "http://localhost:4000/login";
+}
+
+function checkLoginStatus(){
+	if(!localStorage.getItem("JWT")){
+		document.getElementById("login-btn").innerHTML = "Login";
+	}
+}
 function setupModeButtons(){
 	for(var i = 0; i < modeButtons.length; i++){
 		modeButtons[i].addEventListener("click", function(){
@@ -41,8 +57,10 @@ function setupSquares(){
 			var clickedColor = this.style.backgroundColor;
 			//compare color to pickedColor
 			if(clickedColor === pickedColor){
-				if(!alreadyWon)
+				if(!alreadyWon){
 				score += maxScore;
+				sound.select.play();
+				}
 				alreadyWon = true;
 				messageDisplay.textContent = "SCORE : " + score;
 				resetButton.textContent = "Play Again?"
@@ -52,7 +70,9 @@ function setupSquares(){
 				maxScore -= 20;
 				this.style.background = "#232323";
 				messageDisplay.textContent = "SCORE : " + score;
+				sound.select.play();
 			}
+
 		});
 	}
 }

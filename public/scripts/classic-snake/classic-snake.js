@@ -56,6 +56,9 @@ let boardHeight = 15;
 
 let gameState;
 
+var modal = document.querySelector("#myModal");
+var btn = document.querySelector(".leaderboard_pop");
+
 function setBoardDimension() {
   const cellWidth = (cellHeight =
     Math.min(800, document.body.clientWidth) / 20);
@@ -497,5 +500,32 @@ window.addEventListener("resize", setBoardDimension);
 newGameBtn.addEventListener("click", init);
 audioBtn.addEventListener("click", toggleAudio);
 
+/////leaderboard pop up///////////
+btn.addEventListener("click", function(){
+	modal.style.display = "block";
+})
+var span = document.getElementsByClassName("close")[0];
+span.addEventListener("click", function(){
+	modal.style.display = "none";
+})
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 init();
 startMusic();
+
+function logout(){
+  if(localStorage.getItem("JWT")){
+      localStorage.removeItem("JWT");
+  }
+  window.location.href = "http://localhost:4000/login";
+}
+
+function checkLoginStatus(){
+  if(!localStorage.getItem("JWT")){
+    document.getElementById("login-btn").innerHTML = "Login";
+  }
+}
