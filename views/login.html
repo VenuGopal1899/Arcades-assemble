@@ -17,11 +17,16 @@
 				<input id="ign" class="ign" type="text" name="ign" placeholder="Enter your IGN" autocomplete="off" required><br>
 				<input id="password" class="password" type="password" name="password" placeholder="Enter your Password" autocomplete="off" required><br>
 				<div class="err-message"><span id="err-message"></span></div> <br>
-				<input id="submit" class="submit" type="submit" name="submit" value="Login"><br>
-				<input id="signup" class="submit1" type="button" name="signup" value="SignUp" onclick="location.href = '/signup'"><br>
+				<div class="login-signup">
+					<input id="submit" class="submit" type="submit" name="submit" value="Login">
+					<input id="signup" class="submit1" type="button" name="signup" value="SignUp" onclick="location.href = '/signup'">
+				</div>
 			</form>
 			<!-- <a class="recovery" href="#">Forgot Password&#63;</a> -->
 		</div>
+	</div>
+	<div class="games-dashboard">
+		<input id="dashboard" class="submit1" type="button" name="submit" value="Skip to Dashboard" onclick="location.href = '/games'">
 	</div>
 	<script type="text/javascript" src="/scripts/login/login.js"></script>
 </body>

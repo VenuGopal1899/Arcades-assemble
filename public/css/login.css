@@ -44,8 +44,7 @@ a {
 	border: 10px solid white;
 	padding: 20px;
 	width: 22.8em;
-	height: 270px;
-
+	height: 200px;
 }
 header h1 {
     color: rgba(240,240,240,1);
@@ -110,13 +109,16 @@ input:focus {
 .recovery:hover {
 	text-decoration: underline;
 }
-
+.login-signup{
+	display: flow-root;
+	margin-top: -25px;
+}
 .submit {
 	background: rgba(35,35,35, 0.6);
 	color: rgba(220,220,220,1);
 	padding: 0 0 0 0;
-	margin: 7px 0 0 7em;
-	width: 8em;
+	margin: 10px -55px 0 39px;
+	width: 100px;
 	text-transform: uppercase;
 	cursor: pointer;
 	-webkit-transition: background 0.4s;
@@ -152,7 +154,14 @@ input:focus {
 	font-size: 20px;
 	padding-top: 10px;
 }
-
+#dashboard{
+	width: 250px;
+	margin-left: 37px;
+}
+.games-dashboard{
+	text-align: center;
+	margin-left: -30px;
+}
 /*<============================================================>*/
 /*<========Media queries for other displays and devices========>*/
 @media only screen and (max-width: 480px) {
