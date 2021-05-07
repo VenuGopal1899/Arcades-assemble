@@ -10,7 +10,7 @@
   <link href='https://fonts.googleapis.com/css?family=Cinzel Decorative' rel='stylesheet'>
 </head>
 
-<body>
+<body onload="checkLoginStatus()">
     <div class = "head">
         <h2><span id="moveLeft">ARCADES</span> <span id="moveRight">ASSEMBLE</span></h2>
     </div>
@@ -20,7 +20,7 @@
         <li><a href="#" class="active classic-snake-game">Classic Snake</a></li>
         <li><a href="/games/tetris/" class="tetris">Tetris</a></li>
         <li><a href="/games/guess-the-color/" class="guess-the-color">Guess the Color!</a></li>
-        <li><a href="#">Logout</a></li>
+        <li onclick="logout()"><a href="/login" id="login-btn">Logout</a></li>
         <li><a href="/games">Return</a></li>
     </ul>
     <div class="snake-game">
