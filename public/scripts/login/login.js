@@ -23,7 +23,7 @@ async function loginUser(e){
 		// console.log('Got the JWT Access Token and Refresh Token', result);
 		// accessToken and refreshToken and status : 'ok', will be sent as result
 		localStorage.setItem("JWT", result.accessToken);
-		window.location.href = "http://localhost:4000/homepage";
+		window.location.href = "http://localhost:4000/games";
 	} else {
         document.getElementById("err-message").innerHTML = result.error;
     }

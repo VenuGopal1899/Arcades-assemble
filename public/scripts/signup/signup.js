@@ -1,4 +1,4 @@
-var seconds = 5;
+var seconds = 15;
 const form = document.getElementById("signup-form")
 
 form.addEventListener('submit', signupUser);
@@ -8,7 +8,7 @@ async function signupUser(e){
     const firstName = document.getElementById("firstName").value;
     const middleName = document.getElementById("middleName").value;
     const lastName = document.getElementById("lastName").value;
-    const email = document.getElementById("email").value;
+    const useremail = document.getElementById("email").value;
     const ign = document.getElementById("ign").value;
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
@@ -26,7 +26,7 @@ async function signupUser(e){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            firstName, middleName, lastName, email, ign, password
+            firstName, middleName, lastName, useremail, ign, password
         })
     }).then(res => res.json());
 
