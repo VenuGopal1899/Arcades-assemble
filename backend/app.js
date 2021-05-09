@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 
 const User = require('./models/user')
+const Leaderboard = require('./models/leaderboard');
 
 const port = 4000;
 
@@ -23,11 +24,10 @@ const app = express();
 app.use(express.json());
 
 // Connect to remote MongoDB cluster
-
-const dbURI = process.env.MONGODB_URI;
+// const dbURI = process.env.MONGODB_URI;
 
 // Local MongoDB Server
-// const dbURI = 'mongodb://localhost:27017/login-app-db';
+const dbURI = 'mongodb://localhost:27017/login-app-db';
 
 mongoose.connect(dbURI)
 const db = mongoose.connection
@@ -170,15 +170,15 @@ app.post('/api/login', async (req, res) => {
 	res.json({ status: 'error', error: 'Invalid IGN/Password' })
 })
 
-function authenticateToken(req, res, next) {
-	const authHeader = req.headers['authorization']
-	const token = authHeader && authHeader.split(' ')[1]
-	if(token == null) return res.json({status: 'error', error:'No token present'})
-	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-		if (err) return res.json({ status: 'error', error: 'Invalid jwt token'})
-		req.user = user
-		next()
-	})
+function authenticateToken(token) {
+	if(token == null) {
+		var res = {status: 'error', error:'No token present'};
+	} else {
+		jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+			var res = err ? { status: 'error', error: 'Invalid jwt token'} : { status: 'ok', user: user};
+		})
+	}
+	return res;
 }
 
 
@@ -209,5 +209,65 @@ app.delete('/logout', (req, res) => {
 	res.json({ status: 'ok'})
   }
 )
+
+app.post('/api/leaderboard', (req, res) => {
+	const authHeader = req.headers['authorization']
+	const receivedToken = authHeader && authHeader.split(' ')[1]
+
+	var result = authenticateToken(receivedToken);
+
+	if(result.status === 'error')
+		return res.json(result);
+
+	const {gameName, ign, score} = await req.body;
+
+	// One entry in leaderboard per user
+	// Check if there exists an entry of that user with that game
+	// If yes, check and update that entry accordingly
+	// If no such entry found, get the last entry after sorting entries from the table
+	// Check and update that last entry accordingly
+	// For the sake of first entry in that table, create a new instance and add them to the collection
+	// Delete these comments after completion
+
+	try {
+		// Check for existing entry from that user
+		const entryFound = await Leaderboard.find({ gameName: gameName, ign: ign}).lean();
+
+		if(entryFound){
+			if(entryFound.score >= score){
+				return res.json({ status: 'ok'});
+			} else {
+				Leaderboard.updateOne({ gameName: gameName, ign: ign}, { $set: {score: score}});
+				return res.json({ status: 'ok', msg: 'Entry updated in Leaderboard'});
+			}
+		} else {
+			// Get last entry from table after sorting
+			const lastEntry = await Leaderboard.find({gameName: gameName}).sort({score: 1}).limit(1);
+
+			if(lastEntry) {
+				if(lastEntry.score >= score){
+					return res.json({status: 'ok'});
+				} else {
+					Leaderboard.updateOne({ gameName: lastEntry.gameName, ign: lastEntry.ign}, { $set: {gameName: gameName, ign: ign, score: score}});
+					return res.json({ status: 'ok', msg: 'Entry updated in Leaderboard'});
+				}
+			}
+			// For new entry into table
+			else {
+				const response = await new Leaderboard({
+					gameName: gameName,
+					ign: ign ,
+					score: score
+				}).save()
+				console.log('Added entry to Leaderboard successfully: ', response)
+
+				return res.json({ status: 'ok', res: response});
+			}
+		}
+	} catch (error) {
+		console.log(error);
+		return res.json({ status: 'error', error: error})
+	}
+})
 
 app.listen(process.env.PORT || port)

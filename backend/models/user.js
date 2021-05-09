@@ -31,6 +31,26 @@ const UserSchema = new mongoose.Schema(
 		},
 		emailSecret: {
 			type: String,
+		},
+		highscore_flappybird: {
+			type: Number,
+			default: 0
+		},
+		highscore_classic_snake: {
+			type: Number,
+			default: 0
+		},
+		highscore_2048: {
+			type: Number,
+			default: 0
+		},
+		highscore_guess_the_color: {
+			type: Number,
+			default: 0
+		},
+		highscore_tetris: {
+			type: Number,
+			default: 0
 		}
 	},
 	{ timestamps: true }
