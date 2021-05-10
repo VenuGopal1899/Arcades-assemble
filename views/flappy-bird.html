@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/flappy-bird.css">
 
 </head>
-<body>
+<body onload="checkLoginStatus()">
     <div class="header">
         <div class = "head">
             <h2><span id="moveLeft">ARCADES</span> <span id="moveRight">ASSEMBLE</span></h2>
@@ -22,7 +22,7 @@
             <li><a href="/games/classic-snake/" class="classic-snake-game">Classic Snake</a></li>
             <li><a href="/games/tetris/" class="tetris">Tetris</a></li>
             <li><a href="/games/guess-the-color/" class="guess-the-color">Guess the Color!</a></li>
-            <li><a href="#">Logout</a></li>
+            <li onclick="logout()"><a href="/login" id="login-btn">Logout</a></li>
             <li><a href="/games">Return</a></li>
         </ul>
     </div>
@@ -33,6 +33,17 @@
          <div class="game-screen">
             <canvas id="canvas" width="320" height="480"></canvas>
         </div>
+    </div>
+    <div class="leaderboard_pop"><div class="img_wrap"><div class="hide">Leaderboard !</div><img src="/resources/leaderboard/images/trophy.png" width=100% height=100% align="center" ></div></div>
+    <!-- /////Leaderboard pop-up///// -->
+    <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p align="center" font-weight="bold">Leaderboard text</p>
+    </div>
+
     </div>
     <script src="/scripts/flappy-bird/game.js"></script>
 

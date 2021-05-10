@@ -17,12 +17,30 @@
 				<input id="ign" class="ign" type="text" name="ign" placeholder="Enter your IGN" autocomplete="off" required><br>
 				<input id="password" class="password" type="password" name="password" placeholder="Enter your Password" autocomplete="off" required><br>
 				<div class="err-message"><span id="err-message"></span></div> <br>
-				<input id="submit" class="submit" type="submit" name="submit" value="Login"><br>
-				<input id="signup" class="submit1" type="button" name="signup" value="SignUp" onclick="location.href = '/signup'"><br>
+				<div class="login-signup">
+					<input id="submit" class="submit" type="submit" name="submit" value="Login">
+					<input id="signup" class="submit1" type="button" name="signup" value="SignUp" onclick="location.href = '/signup'">
+				</div>
 			</form>
 			<!-- <a class="recovery" href="#">Forgot Password&#63;</a> -->
 		</div>
 	</div>
+	<div class="games-dashboard">
+		<input id="dashboard" class="submit1" type="button" name="submit" value="Skip to Dashboard" onclick="skipToDashboard()">
+	</div>
+
+	<div id="modal_container" class="modal-container">
+        <div class="modal">
+            <button id="close" class="close">&times;</button>
+            <h1>ArcadesAssemble</h1>
+			<br>
+			<br>
+            <p style="width: 395px;">Your current progress will <span style="color: red;">not be saved</span> unless you are logged in. Would you like to proceed ?</p>
+			<br><br><br>
+            <button id="Yes">Yes</button>
+            <button id="No">No</button>
+        </div>
+    </div>
 	<script type="text/javascript" src="/scripts/login/login.js"></script>
 </body>
 
