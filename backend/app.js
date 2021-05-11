@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 
 const User = require('./models/user')
+const DurationGame = require('./models/durationgame');
 
 const port = 4000;
 
@@ -24,10 +25,10 @@ app.use(express.json());
 
 // Connect to remote MongoDB cluster
 
-const dbURI = process.env.MONGODB_URI;
+// const dbURI = process.env.MONGODB_URI;
 
 // Local MongoDB Server
-// const dbURI = 'mongodb://localhost:27017/login-app-db';
+const dbURI = 'mongodb://localhost:27017/login-app-db';
 
 mongoose.connect(dbURI)
 const db = mongoose.connection
@@ -88,10 +89,12 @@ const sendEmail = (email, ign, verifyUniqueString) => {
 				`
 	}
 	transport.sendMail(mailOptions, function(error, response) {
-		if(error)
-			console.log(error)
-		else
+		if(error){
+			console.log(error);
+			sendEmail(email, ign, verifyUniqueString);
+		} else{
 			console.log("Message sent")
+		}
 	})
 }
 
@@ -175,7 +178,7 @@ function authenticateToken(req, res, next) {
 	const token = authHeader && authHeader.split(' ')[1]
 	if(token == null) return res.json({status: 'error', error:'No token present'})
 	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-		if (err) return res.json({ status: 'error', error: 'Invalid jwt token'})
+		if (err) return res.json({ status: 'error', tokenExpired: true})
 		req.user = user
 		next()
 	})
@@ -194,11 +197,12 @@ function generateAccessToken(user) {
 }
 
 app.post('/token', (req, res) => {
-	const refreshToken = req.body.token
-	if (refreshToken == null) return res.json({ status: 'error', error: 'No refrresh token found' })
+	const authHeader = req.headers['authorization']
+	const refreshToken = authHeader && authHeader.split(' ')[1]
+	if (refreshToken == null) return res.json({ status: 'error', error: 'No refresh token found' })
 	if (!refreshTokens.includes(refreshToken)) return res.json({ status: 'error', error: 'Invalid token' })
 	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-		if (err) return res.json({ status: 'error', error: 'Invalid token' })
+		if (err) return res.json({ status: 'error', error: 'Invalid refresh token' })
 		const accessToken = generateAccessToken({ user })
 		res.json({ accessToken: accessToken })
 	})
@@ -209,5 +213,37 @@ app.delete('/logout', (req, res) => {
 	res.json({ status: 'ok'})
   }
 )
+
+app.post('/api/gamePlayedDuration', authenticateToken, async (req, res) => {
+	const {gameName, duration_mins} = await req.body;
+	try {
+		DurationGame.find({gameName: gameName}, (err, res) => {
+			if(res.length === 0){
+				DurationGame.create({
+					gameName: gameName,
+					duration_mins: parseFloat(duration_mins)
+				});
+				console.log('DurationGame added succesfully');
+			}
+			else {
+				const existingDuration = res[0].duration_mins;
+				const newDuration = parseFloat(existingDuration) + parseFloat(duration_mins);
+				res[0].duration_mins = parseFloat(newDuration).toFixed(3);
+				res[0].save();
+				console.log('DurationGame updated succesfully ');
+			}
+		});
+	} catch (error) {
+		console.log(error);
+		return res.json({status: 'error', error: error});
+	}
+	return res.json({status: 'ok'});
+})
+
+app.get('/api/gamePlayedDuration', async (req, res, authenticateToken) => {
+	DurationGame.find({}, (err, net) => {
+		return res.json({status: 'ok', res: net});
+	})
+})
 
 app.listen(process.env.PORT || port)
