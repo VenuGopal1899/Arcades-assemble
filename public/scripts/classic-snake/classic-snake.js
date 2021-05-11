@@ -13,6 +13,11 @@ const STATE_PLAYING = 1;
 const STATE_GAME_OVER = 2;
 const STATE_PAUSED = 3;
 
+var startTimeStamp;
+var endTimeStamp;
+var isLoggedIn = true;
+const gameName = "classic-snake";
+
 const board = document.querySelector(".board");
 
 const score = document.querySelector(".score-number");
@@ -320,12 +325,18 @@ function onEachFrame(timestamp) {
 }
 
 function startGame() {
+  startTimeStamp = new Date();
   startBtn.disabled = true;
   pauseBtn.disabled = false;
   startAnimation();
 }
 
 function gameOver() {
+  endTimeStamp = new Date();
+  const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
+  if(isLoggedIn){
+    recordDurationStatistics(gameName, duration_mins);
+  }
   if (audio.enabled) {
     audio.hit.play().catch(() => (gameOverText.style.display = "initial"));
     audio.hit.addEventListener("ended", () => {
@@ -520,6 +531,8 @@ startMusic();
 function logout(){
   if(localStorage.getItem("JWT")){
       localStorage.removeItem("JWT");
+      localStorage.removeItem("RefreshToken");
+      isLoggedIn = false;
   }
   window.location.href = "http://localhost:4000/login";
 }
@@ -527,5 +540,6 @@ function logout(){
 function checkLoginStatus(){
   if(!localStorage.getItem("JWT")){
     document.getElementById("login-btn").innerHTML = "Login";
+    isLoggedIn = false;
   }
 }
