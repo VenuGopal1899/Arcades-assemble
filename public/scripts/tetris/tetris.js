@@ -556,10 +556,12 @@ drawHoldPieceBoard(holdBoard);
 setInterval( defaultDrop, 1000/difficultyLevel);
 
 function logout(){
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-        localStorage.removeItem("RefreshToken");
-        isLoggedIn = false;
+    if(await logoutUser()){
+        if(localStorage.getItem("JWT")){
+            localStorage.removeItem("JWT");
+            localStorage.removeItem("RefreshToken");
+            isLoggedIn = false;
+        }
     }
     window.location.href = "http://localhost:4000/login";
 }

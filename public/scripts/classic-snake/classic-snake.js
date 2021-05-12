@@ -528,11 +528,13 @@ window.onclick = function(event) {
 init();
 startMusic();
 
-function logout(){
-  if(localStorage.getItem("JWT")){
+async function logout(){
+  if(await logoutUser()){
+    if(localStorage.getItem("JWT")){
       localStorage.removeItem("JWT");
       localStorage.removeItem("RefreshToken");
       isLoggedIn = false;
+    }
   }
   window.location.href = "http://localhost:4000/login";
 }

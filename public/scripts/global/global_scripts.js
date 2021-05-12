@@ -27,3 +27,15 @@ async function recordDurationStatistics(gameName, duration_mins){
     recordDurationStatistics(gameName, duration_mins);
   }
 }
+
+
+async function logoutUser(){
+  const REFRESH_TOKEN = localStorage.getItem("RefreshToken");
+  const result = await fetch('/api/logout', {
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'REFRESH_TOKEN '+ REFRESH_TOKEN,
+      'Content-type': 'application/json'
+    }
+  }).then(res => res.json());
+}

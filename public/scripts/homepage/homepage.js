@@ -7,9 +7,11 @@ function checkLoginStatus(){
 }
 
 function logout(){
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-        localStorage.removeItem("RefreshToken");
+    if(await logoutUser()){
+        if(localStorage.getItem("JWT")){
+            localStorage.removeItem("JWT");
+            localStorage.removeItem("RefreshToken");
+        }
     }
     window.location.href = "http://localhost:4000/login";
 }

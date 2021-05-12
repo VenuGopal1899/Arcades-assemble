@@ -208,9 +208,11 @@ app.post('/token', (req, res) => {
 	})
 })
 
-app.delete('/logout', (req, res) => {
-	refreshTokens = refreshTokens.filter(token => token !== req.body.token)
-	res.json({ status: 'ok'})
+app.delete('/api/logout', (req, res) => {
+	const authHeader = req.headers['authorization']
+	const reqToken = authHeader && authHeader.split(' ')[1]
+	refreshTokens = refreshTokens.filter(token => token !== reqToken)
+	return res.json({ status: 'ok'})
   }
 )
 
