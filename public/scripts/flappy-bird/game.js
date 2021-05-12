@@ -1,3 +1,8 @@
+var startTimeStamp;
+var endTimeStamp;
+var isLoggedIn = true;
+const gameName = "Flappy-Bird";
+
 ! function(t) {
     var e = {};
     var modal = document.querySelector("#myModal");
@@ -582,12 +587,18 @@
                 }), this.canvas.addEventListener("click", (function(e) {
                     switch (t.state) {
                         case t.states.getReady:
+                            startTimeStamp = new Date();
                             t.start();
                             break;
                         case t.states.game:
                             t.player.flap(), t.fx.play("flap");
                             break;
                         case t.states.gameOver:
+                            endTimeStamp = new Date();
+                            const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
+                            if(isLoggedIn){
+                                recordDurationStatistics(gameName, duration_mins);
+                            }
                             var s = t.canvas.getBoundingClientRect(),
                                 i = e.clientX - s.left,
                                 r = e.clientY - s.top;
@@ -600,8 +611,10 @@
 }]);
 
 function logout(){
+    isLoggedIn = false;
     if(localStorage.getItem("JWT")){
         localStorage.removeItem("JWT");
+        localStorage.removeItem("RefreshToken");
     }
     window.location.href = "http://localhost:4000/login";
 }
@@ -609,5 +622,6 @@ function logout(){
 function checkLoginStatus(){
   if(!localStorage.getItem("JWT")){
     document.getElementById("login-btn").innerHTML = "Login";
+    isLoggedIn = false;
   }
 }
