@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
+const cors = require('cors');
 
 const User = require('./models/user')
 const DurationGame = require('./models/durationgame')
@@ -22,6 +23,7 @@ dotenv.config();
 // Setup Express app
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Connect to remote MongoDB cluster
 
@@ -209,7 +211,7 @@ app.post('/token', (req, res) => {
 app.delete('/api/logout', (req, res) => {
 	const authHeader = req.headers['authorization']
 	const reqToken = authHeader && authHeader.split(' ')[1]
-	refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+	refreshTokens = refreshTokens.filter(token => token !== reqToken)
 	res.json({ status: 'ok'})
   }
 )

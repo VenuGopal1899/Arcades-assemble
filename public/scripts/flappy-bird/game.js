@@ -612,10 +612,7 @@ const gameName = "Flappy-Bird";
 
 function logout(){
     isLoggedIn = false;
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-        localStorage.removeItem("RefreshToken");
-    }
+    userLogout();
     window.location.href = "http://localhost:4000/login";
 }
 

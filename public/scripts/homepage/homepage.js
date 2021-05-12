@@ -7,9 +7,6 @@ function checkLoginStatus(){
 }
 
 function logout(){
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-        localStorage.removeItem("RefreshToken");
-    }
+    userLogout();
     window.location.href = "http://localhost:4000/login";
 }

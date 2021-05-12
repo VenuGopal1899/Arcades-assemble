@@ -27,3 +27,22 @@ async function recordDurationStatistics(gameName, duration_mins){
     recordDurationStatistics(gameName, duration_mins);
   }
 }
+
+async function userLogout(){
+  const REFRESH_TOKEN = localStorage.getItem("RefreshToken");
+  const response = await fetch('/api/logout', {
+    method: 'DELETE',
+    headers: {
+      'Authorization': 'REFRESH_TOKEN '+ REFRESH_TOKEN,
+      'Content-type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .catch(err => console.log(err))
+  .then(() => {
+    if(localStorage.getItem("JWT")){
+      localStorage.removeItem("JWT");
+      localStorage.removeItem("RefreshToken");
+    }
+  });
+}

@@ -32,9 +32,7 @@ function init(){
 
 function logout(){
 	isLoggedIn = false;
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-    }
+    userLogout();
     window.location.href = "http://localhost:4000/login";
 }
 
