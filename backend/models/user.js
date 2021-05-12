@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema(
 			required: true,
 			unique: true
 		},
+		hashedEmail: {
+			type: String
+		},
 		ign: {
 			type: String,
 			required: true,

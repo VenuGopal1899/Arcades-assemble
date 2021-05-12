@@ -3,17 +3,13 @@ const mongoose = require('mongoose');
 const LeaderboardSchema = new mongoose.Schema ({
     gameName : {
         type: String,
-        enum: ['flappybird', 'classic_snake', '2048', 'guess_the_color', 'tetris'],
-        required: true
+        enum: ['flappybird', 'classic_snake', '2048', 'guess_the_color', 'tetris']
     },
     ign: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+        type: String
     },
     score: {
-        type: Number,
-        required: true
+        type: Number
     }
 })
 
