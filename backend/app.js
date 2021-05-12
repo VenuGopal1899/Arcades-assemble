@@ -94,8 +94,10 @@ const sendEmail = (email, ign, verifyUniqueString) => {
 				`
 	}
 	transport.sendMail(mailOptions, function(error, response) {
-		if(error)
+		if(error) {
 			console.log(error)
+			sendEmail(email, ign, verifyUniqueString)
+		}
 		else
 			console.log("Message sent")
 	})
@@ -197,11 +199,6 @@ function generateAccessToken(user1) {
 	return jwt.sign(
 		{
 			ign: user1.ign,
-			highscore_flappybird: user1.highscore_flappybird,
-			highscore_classic_snake: user1.highscore_classic_snake,
-			highscore_2048: user1.highscore_2048,
-			highscore_guess_the_color: user1.highscore_guess_the_color,
-			highscore_tetris: user1.highscore_tetris,
 			hashedEmail: user1.hashedEmail,
 			createdAt: Date.now()
 		},
