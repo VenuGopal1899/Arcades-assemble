@@ -12,8 +12,6 @@ const cors = require('cors');
 
 const User = require('./models/user')
 const DurationGame = require('./models/durationgame')
-
-const User = require('./models/user')
 const Leaderboard = require('./models/leaderboard');
 
 const {entry} = require('./controllers/leaderboard')
