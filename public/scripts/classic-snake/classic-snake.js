@@ -542,3 +542,8 @@ function checkLoginStatus(){
     isLoggedIn = false;
   }
 }
+
+async function getScores(){
+  const res = await getLeaderboardScores(gameName);
+  // console.log(res);
+}

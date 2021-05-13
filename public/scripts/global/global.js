@@ -1,3 +1,19 @@
+async function getNewAcessToken(){
+  const REFRESH_TOKEN = localStorage.getItem("RefreshToken");
+  const newAccessToken = await fetch('/token', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'REFRESH_TOKEN '+ REFRESH_TOKEN,
+      'Content-type': 'application/json'
+    }
+  }).then(res => res.json());
+
+  if(localStorage.getItem("JWT")){
+    localStorage.removeItem("JWT");
+  }
+  localStorage.setItem("JWT", newAccessToken);
+}
+
 async function recordDurationStatistics(gameName, duration_mins){
   const ACCESS_TOKEN = localStorage.getItem("JWT");
   const result = await fetch('/api/gamePlayedDuration', {
@@ -12,18 +28,7 @@ async function recordDurationStatistics(gameName, duration_mins){
   }).then(res => res.json());
 
   if(result.status == 'error' && result.tokenExpired){
-    const REFRESH_TOKEN = localStorage.getItem("RefreshToken");
-    const newAccessToken = await fetch('/token', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'REFRESH_TOKEN '+ REFRESH_TOKEN,
-        'Content-type': 'application/json'
-      }
-    }).then(res => res.json());
-    if(localStorage.getItem("JWT")){
-      localStorage.removeItem("JWT");
-    }
-    localStorage.setItem("JWT", newAccessToken);
+    await getNewAcessToken();
     recordDurationStatistics(gameName, duration_mins);
   }
 }
@@ -65,18 +70,29 @@ async function addScoreToLeaderboard(gameName, ign, hashedEmail, score){
   }).then(res => res.json());
 
   if(result.status == 'error' && result.tokenExpired){
-    const REFRESH_TOKEN = localStorage.getItem("RefreshToken");
-    const newAccessToken = await fetch('/token', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'REFRESH_TOKEN '+ REFRESH_TOKEN,
-        'Content-type': 'application/json'
-      }
-    }).then(res => res.json());
-    if(localStorage.getItem("JWT")){
-      localStorage.removeItem("JWT");
-    }
-    localStorage.setItem("JWT", newAccessToken);
+    await getNewAcessToken();
     addScoreToLeaderboard(gameName, ign, hashedEmail, score);
+  }
+}
+
+async function getLeaderboardScores(gameName){
+  const ACCESS_TOKEN = localStorage.getItem("JWT");
+  const result = await fetch('/api/leaderboard', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'ACCESS_TOKEN '+ ACCESS_TOKEN,
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      gameName
+    })
+  }).then(res => res.json())
+
+  if(result.status == 'error' && result.tokenExpired){
+    getNewAcessToken();
+    getLeaderboardScores(gameName);
+  }
+  else if(result.status === 'ok'){
+    return result.records;
   }
 }

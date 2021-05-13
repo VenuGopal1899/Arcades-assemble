@@ -278,10 +278,10 @@ app.post('/api/games/game-2048', authenticateToken, entry)
 app.post('/api/games/flappy-bird', authenticateToken, entry)
 app.post('/api/games/classic-snake', authenticateToken, entry)
 
-app.get('/api/leaderboard', authenticateToken, async (req, res) => {
+app.post('/api/leaderboard', authenticateToken, async (req, res) => {
 	const {gameName} = await req.body
 	let records = await Leaderboard.find({gameName: gameName}).limit(10).sort([["score", "desc"]]).exec()
-	res.json(records)
+	res.json({ status: 'ok', records: records});
 })
 
 app.listen(process.env.PORT || port)
