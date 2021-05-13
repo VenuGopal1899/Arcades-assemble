@@ -165,18 +165,13 @@ function randomColor(){
 
 
 /////leaderboard pop up///////////
-btn.addEventListener("click", function(){
-	modal.style.display = "block";
-})
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-span.addEventListener("click", function(){
-	modal.style.display = "none";
-})
+const open = document.getElementById("open");
+const modal_Container = document.getElementById("modal_container");
+const close = document.getElementById("close");
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+open.addEventListener("click",() => {
+    modal_Container.classList.add("show");
+});
+close.addEventListener("click",() => {
+    modal_Container.classList.remove("show");
+});

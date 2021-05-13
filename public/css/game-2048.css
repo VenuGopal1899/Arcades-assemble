@@ -155,7 +155,7 @@ a:hover{
   	height: 100px;
 	position: fixed;
     bottom: 20px;
-    right: 10px; 
+    right: 10px;
     line-height: 1;
     cursor: pointer;
 	-webkit-animation: wobble-hor-bottom 5s both;
@@ -175,49 +175,6 @@ a:hover{
   font-weight: bold;
 }
 
-
-/*////leaderboard popup/////////*/
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1001; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #0099ff;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
-  height: 70%;
-  align-self: center;
-  border-radius: 10%;
-}
-
-/* The Close Button */
-.close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  margin-right: 10px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
 @-webkit-keyframes wobble-hor-bottom {
   0%,
   100% {
@@ -283,4 +240,9 @@ a:hover{
   	-webkit-transform: translateX(0%);
             transform: translateX(0%);
   }
+}
+
+.score-container .score{
+  font-size: 18px;
+  font-family: inherit;
 }
