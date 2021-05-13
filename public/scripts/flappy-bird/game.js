@@ -307,23 +307,23 @@
 
  };
 
-gnd.sprite.src="img/ground.png";
-bg.sprite.src="img/BG.png";
-pipe.top.sprite.src="img/toppipe.png";
-pipe.bot.sprite.src="img/botpipe.png";
-UI.gameOver.sprite.src="img/go.png";
-UI.getReady.sprite.src="img/getready.png";
-UI.tap[0].sprite.src="img/tap/t0.png";
-UI.tap[1].sprite.src="img/tap/t1.png";
-bird.animations[0].sprite.src="img/bird/b0.png";
-bird.animations[1].sprite.src="img/bird/b1.png";
-bird.animations[2].sprite.src="img/bird/b2.png";
-bird.animations[3].sprite.src="img/bird/b0.png";
-SFX.start.src = "sfx/start.wav"
-SFX.flap.src = "sfx/flap.wav"
-SFX.score.src = "sfx/score.wav"
-SFX.hit.src = "sfx/hit.wav"
-SFX.die.src = "sfx/die.wav"
+gnd.sprite.src="../../resources/flappy-bird/img/ground.png";
+bg.sprite.src="../../resources/flappy-bird/img/BG.png";
+pipe.top.sprite.src="../../resources/flappy-bird/img/toppipe.png";
+pipe.bot.sprite.src="../../resources/flappy-bird/img/botpipe.png";
+UI.gameOver.sprite.src="../../resources/flappy-bird/img/go.png";
+UI.getReady.sprite.src="../../resources/flappy-bird/img/getready.png";
+UI.tap[0].sprite.src="../../resources/flappy-bird/img/tap/t0.png";
+UI.tap[1].sprite.src="../../resources/flappy-bird/img/tap/t1.png";
+bird.animations[0].sprite.src="../../resources/flappy-bird/img/bird/b0.png";
+bird.animations[1].sprite.src="../../resources/flappy-bird/img/bird/b1.png";
+bird.animations[2].sprite.src="../../resources/flappy-bird/img/bird/b2.png";
+bird.animations[3].sprite.src="../../resources/flappy-bird/img/bird/b0.png";
+SFX.start.src = "../../resources/flappy-bird/sfx/start.wav"
+SFX.flap.src = "../../resources/flappy-bird/sfx/flap.wav"
+SFX.score.src = "../../resources/flappy-bird/sfx/score.wav"
+SFX.hit.src = "../../resources/flappy-bird/sfx/hit.wav"
+SFX.die.src = "../../resources/flappy-bird/sfx/die.wav"
 
 gameLoop();
 
