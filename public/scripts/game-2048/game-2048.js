@@ -135,7 +135,7 @@ const grid = {
         if(isLoggedIn){
           recordDurationStatistics(gameName, duration_mins);
           var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
-          addScoreToLeaderboard(gameName, payloadObject.ign, gameScore);
+          addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, gameScore);
         }
         document.getElementsByClassName("game-over")[0].innerHTML = "Game Over!";
         document.getElementsByClassName("new-game")[0].innerHTML = "Play Again?";

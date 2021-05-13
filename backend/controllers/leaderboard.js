@@ -1,8 +1,7 @@
 const Leaderboard = require("../models/leaderboard");
-const User = require("../models/user");
 
 exports.entry = async (req, res) => {
-    const {gameName, ign, score} = await req.body;
+    const {gameName, ign, hashedEmail, score} = await req.body;
 
 	try {
 		// Check for existing entry from that user
@@ -43,6 +42,7 @@ exports.entry = async (req, res) => {
 				const response = await new Leaderboard({
 					gameName: gameName,
 					ign: ign ,
+					hashedEmail: hashedEmail,
 					score: score
 				}).save()
 				console.log('Added entry to Leaderboard successfully: ', response)

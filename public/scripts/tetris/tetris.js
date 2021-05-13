@@ -451,7 +451,7 @@ function gameOver() {
     if(isLoggedIn){
         recordDurationStatistics(gameName, duration_mins);
         var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
-        addScoreToLeaderboard(gameName, payloadObject.ign, gameScore);
+        addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, gameScore);
     }
     document.getElementById("game-over-tetris").innerHTML = "Game Over!";
     document.getElementById("startgame").innerHTML = "Play Again ?";

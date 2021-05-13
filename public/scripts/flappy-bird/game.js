@@ -600,7 +600,7 @@ var gameScore = 0;
                             if(isLoggedIn){
                                 recordDurationStatistics(gameName, duration_mins);
                                 var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
-                                addScoreToLeaderboard(gameName, payloadObject.ign, gameScore);
+                                addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, gameScore);
                             }
                             var s = t.canvas.getBoundingClientRect(),
                                 i = e.clientX - s.left,

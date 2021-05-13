@@ -338,7 +338,7 @@ function gameOver() {
   if(isLoggedIn){
     recordDurationStatistics(gameName, duration_mins);
     var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
-    addScoreToLeaderboard(gameName, payloadObject.ign, gameScore);
+    addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, gameScore);
   }
   if (audio.enabled) {
     audio.hit.play().catch(() => (gameOverText.style.display = "initial"));

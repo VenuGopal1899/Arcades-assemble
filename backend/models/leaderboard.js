@@ -8,6 +8,9 @@ const LeaderboardSchema = new mongoose.Schema ({
     ign: {
         type: String
     },
+    hashedEmail: {
+        type: String
+    },
     score: {
         type: Number
     }

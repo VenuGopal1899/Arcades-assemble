@@ -50,7 +50,7 @@ async function userLogout(){
   });
 }
 
-async function addScoreToLeaderboard(gameName, ign, score){
+async function addScoreToLeaderboard(gameName, ign, hashedEmail, score){
   // console.log('gameName, ign, score ', gameName, ign, score);
   const ACCESS_TOKEN = localStorage.getItem("JWT");
   const result = await fetch(`/api/games/${gameName}`, {
@@ -60,7 +60,7 @@ async function addScoreToLeaderboard(gameName, ign, score){
       'Content-type': 'application/json'
     },
     body: JSON.stringify({
-      gameName, ign, score
+      gameName, ign, hashedEmail, score
     })
   }).then(res => res.json());
 
@@ -77,6 +77,6 @@ async function addScoreToLeaderboard(gameName, ign, score){
       localStorage.removeItem("JWT");
     }
     localStorage.setItem("JWT", newAccessToken);
-    addScoreToLeaderboard(gameName, ign, score);
+    addScoreToLeaderboard(gameName, ign, hashedEmail, score);
   }
 }
