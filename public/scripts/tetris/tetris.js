@@ -578,10 +578,10 @@ async function getScores(){
     var length = (res.length >= 5) ? 5 : res.length;
     var innerhtml = "";
     for(var i=0; i<length; i++){
-        currScoreHtml = `<div class="single-member-score"><div class="position_number">${i+1}</div><div class="details-for-member"><div class="profile-pic"></div><span class="name">${res[i].ign}</span><span class="score">${res[i].score} pts.</span></div>`
+        currScoreHtml = `<div class="single-member-score"><div class="position_number">${i+1}</div><div class="details-for-member"><div class="profile-pic"></div><span class="name">${res[i].ign}</span><span class="score">${res[i].score} pts.</span></div></div>`
         innerhtml = innerhtml + currScoreHtml;
     }
-    console.log('innerhtml ' ,innerhtml);
+    // console.log('innerhtml ' ,innerhtml);
     scoresList.innerHTML = innerhtml;
     // console.log(res);
 }
