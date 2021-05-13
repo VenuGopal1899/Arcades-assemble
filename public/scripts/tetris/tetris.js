@@ -4,7 +4,8 @@ var btn = document.querySelector(".leaderboard_pop");
 var startTimeStamp;
 var endTimeStamp;
 var isLoggedIn = true;
-const gameName = "Tetris";
+const gameName = "tetris";
+var gameScore = 0;
 
 document.querySelectorAll("button").forEach( function(item) {
     item.addEventListener('focus', function() {
@@ -446,8 +447,11 @@ function newGame() {
 function gameOver() {
     endTimeStamp = new Date();
     const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
+    gameScore = lineClear*10;
     if(isLoggedIn){
         recordDurationStatistics(gameName, duration_mins);
+        var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+        addScoreToLeaderboard(gameName, payloadObject.ign, gameScore);
     }
     document.getElementById("game-over-tetris").innerHTML = "Game Over!";
     document.getElementById("startgame").innerHTML = "Play Again ?";

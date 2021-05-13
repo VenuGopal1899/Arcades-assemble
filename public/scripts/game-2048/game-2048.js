@@ -4,7 +4,8 @@ var btn = document.querySelector(".leaderboard_pop");
 var startTimeStamp;
 var endTimeStamp;
 var isLoggedIn = true;
-const gameName = "2048";
+var gameScore = 0;
+const gameName = "game-2048";
 
 const grid = {
   gridElement: document.getElementsByClassName("grid")[0],
@@ -133,6 +134,8 @@ const grid = {
         const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
         if(isLoggedIn){
           recordDurationStatistics(gameName, duration_mins);
+          var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+          addScoreToLeaderboard(gameName, payloadObject.ign, gameScore);
         }
         document.getElementsByClassName("game-over")[0].innerHTML = "Game Over!";
         document.getElementsByClassName("new-game")[0].innerHTML = "Play Again?";
@@ -202,6 +205,7 @@ const number = {
       // double target cell's number
       const newNumberValue = toCell.number.dataset.value * 2;
       const score = document.getElementsByClassName("score")[0];
+      gameScore = parseInt(score.innerHTML) + parseInt(newNumberValue);
       score.innerHTML = parseInt(score.innerHTML) + parseInt(newNumberValue);
       if (score.innerHTML == 2048) {
         document.getElementsByClassName("result")[0].innerHTML =

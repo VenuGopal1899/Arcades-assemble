@@ -16,7 +16,8 @@ var alreadyWon = false;
 var startTimeStamp;
 var endTimeStamp;
 var isLoggedIn = true;
-const gameName = "Guess the color";
+const gameName = "guess-the-color";
+var gameScore = 0;
 
 const sound={
     select: new Audio('../../resources/colorGame/sounds/select.mp3')
@@ -63,12 +64,15 @@ function setupSquares(){
 			if(clickedColor === pickedColor){
 				if(!alreadyWon){
 				score += maxScore;
+				gameScore = score;
 				sound.select.play();
 				}
 				endTimeStamp = new Date();
 				const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
 				if(isLoggedIn){
 					recordDurationStatistics(gameName, duration_mins);
+					var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+    				addScoreToLeaderboard(gameName, payloadObject.ign, gameScore);
 				}
 				alreadyWon = true;
 				messageDisplay.textContent = "SCORE : " + score;

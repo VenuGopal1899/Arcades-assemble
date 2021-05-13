@@ -1,7 +1,8 @@
 var startTimeStamp;
 var endTimeStamp;
 var isLoggedIn = true;
-const gameName = "Flappy-Bird";
+const gameName = "flappy-bird";
+var gameScore = 0;
 
 ! function(t) {
     var e = {};
@@ -519,7 +520,7 @@ const gameName = "Flappy-Bird";
         }, {
             key: "addScore",
             value: function() {
-                this.score++, this.bestScore = Math.max(this.score, this.bestScore), localStorage.setItem("bestScore", this.bestScore), this.fx.play("score")
+                gameScore = ++this.score, this.bestScore = Math.max(this.score, this.bestScore), localStorage.setItem("bestScore", this.bestScore), this.fx.play("score")
             }
         }, {
             key: "run",
@@ -598,6 +599,8 @@ const gameName = "Flappy-Bird";
                             const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
                             if(isLoggedIn){
                                 recordDurationStatistics(gameName, duration_mins);
+                                var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+                                addScoreToLeaderboard(gameName, payloadObject.ign, gameScore);
                             }
                             var s = t.canvas.getBoundingClientRect(),
                                 i = e.clientX - s.left,

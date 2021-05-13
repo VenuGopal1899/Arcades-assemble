@@ -16,7 +16,8 @@ const STATE_PAUSED = 3;
 var startTimeStamp;
 var endTimeStamp;
 var isLoggedIn = true;
-const gameName = "Classic Snake";
+const gameName = "classic-snake";
+var gameScore = 0;
 
 const board = document.querySelector(".board");
 
@@ -150,6 +151,7 @@ function eatFood() {
 }
 
 function showScore() {
+  gameScore = gameState.score;
   score.innerHTML = gameState.score;
 }
 
@@ -335,6 +337,8 @@ function gameOver() {
   const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
   if(isLoggedIn){
     recordDurationStatistics(gameName, duration_mins);
+    var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+    addScoreToLeaderboard(gameName, payloadObject.ign, gameScore);
   }
   if (audio.enabled) {
     audio.hit.play().catch(() => (gameOverText.style.display = "initial"));

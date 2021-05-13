@@ -49,3 +49,34 @@ async function userLogout(){
     window.location.href = "http://localhost:4000/login";
   });
 }
+
+async function addScoreToLeaderboard(gameName, ign, score){
+  // console.log('gameName, ign, score ', gameName, ign, score);
+  const ACCESS_TOKEN = localStorage.getItem("JWT");
+  const result = await fetch(`/api/games/${gameName}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'ACCESS_TOKEN '+ ACCESS_TOKEN,
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      gameName, ign, score
+    })
+  }).then(res => res.json());
+
+  if(result.status == 'error' && result.tokenExpired){
+    const REFRESH_TOKEN = localStorage.getItem("RefreshToken");
+    const newAccessToken = await fetch('/token', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'REFRESH_TOKEN '+ REFRESH_TOKEN,
+        'Content-type': 'application/json'
+      }
+    }).then(res => res.json());
+    if(localStorage.getItem("JWT")){
+      localStorage.removeItem("JWT");
+    }
+    localStorage.setItem("JWT", newAccessToken);
+    addScoreToLeaderboard(gameName, ign, score);
+  }
+}
