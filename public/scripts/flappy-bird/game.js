@@ -613,7 +613,6 @@ const gameName = "Flappy-Bird";
 function logout(){
     isLoggedIn = false;
     userLogout();
-    window.location.href = "http://localhost:4000/login";
 }
 
 function checkLoginStatus(){

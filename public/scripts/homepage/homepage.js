@@ -8,5 +8,4 @@ function checkLoginStatus(){
 
 function logout(){
     userLogout();
-    window.location.href = "http://localhost:4000/login";
 }

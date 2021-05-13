@@ -44,5 +44,8 @@ async function userLogout(){
       localStorage.removeItem("JWT");
       localStorage.removeItem("RefreshToken");
     }
+  })
+  .then(() => {
+    window.location.href = "http://localhost:4000/login";
   });
 }

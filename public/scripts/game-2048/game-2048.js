@@ -283,7 +283,6 @@ window.onclick = function(event) {
 function logout(){
   isLoggedIn = false;
   userLogout();
-  window.location.href = "http://localhost:4000/login";
 }
 
 function checkLoginStatus(){
