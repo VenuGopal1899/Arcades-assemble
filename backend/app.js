@@ -6,10 +6,18 @@ const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
+
+const crypto = require('crypto');
 const cors = require('cors');
 
 const User = require('./models/user')
 const DurationGame = require('./models/durationgame')
+
+const User = require('./models/user')
+const Leaderboard = require('./models/leaderboard');
+
+const {entry} = require('./controllers/leaderboard')
+
 
 const port = 4000;
 
@@ -26,17 +34,19 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to remote MongoDB cluster
-
-const dbURI = process.env.MONGODB_URI;
+// const dbURI = process.env.MONGODB_URI;
 
 // Local MongoDB Server
-// const dbURI = 'mongodb://localhost:27017/login-app-db';
+const dbURI = 'mongodb://localhost:27017/login-app-db';
 
 mongoose.connect(dbURI)
 const db = mongoose.connection
 db.on('error', error => console.error(error))
-db.once('open', () => console.log('Connected to mongoose'))
-
+db.once('open', async () => {
+	console.log('Connected to mongoose')
+	await new Leaderboard({}).save()
+	}
+)
 mongoose.Promise = global.Promise;
 
 // Add a Middleware to serve static files
@@ -91,8 +101,10 @@ const sendEmail = (email, ign, verifyUniqueString) => {
 				`
 	}
 	transport.sendMail(mailOptions, function(error, response) {
-		if(error)
+		if(error) {
 			console.log(error)
+			sendEmail(email, ign, verifyUniqueString)
+		}
 		else
 			console.log("Message sent")
 	})
@@ -133,7 +145,9 @@ app.get('/api/verify/:uniqueString', async (req, res) => {
 	// console.log(uniqueString)
 	const user = await User.findOne({ emailSecret: uniqueString })
 	if (user) {
+		var emailstr = user.useremail
 		user.confirmed = true
+		user.hashedEmail =  crypto.createHash('md5').update(emailstr).digest('hex')
 		await user.save()
 		res.redirect('/')
 	}
@@ -175,21 +189,25 @@ app.post('/api/login', async (req, res) => {
 
 function authenticateToken(req, res, next) {
 	const authHeader = req.headers['authorization']
+	// console.log(authHeader)
 	const token = authHeader && authHeader.split(' ')[1]
+	// console.log(token)
 	if(token == null) return res.json({status: 'error', error:'No token present'})
 	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-		if (err) return res.json({ status: 'error', tokenExpired: true})
+		if (err) return res.json({ status: 'error', error: 'Invalid jwt token', tokenExpired: true})
 		req.user = user
 		next()
 	})
 }
 
 
-function generateAccessToken(user) {
+function generateAccessToken(user1) {
+	console.log('New access token generated')
 	return jwt.sign(
 		{
-			id: user._id,
-			ign: user.ign
+			ign: user1.ign,
+			hashedEmail: user1.hashedEmail,
+			createdAt: Date.now()
 		},
 		process.env.ACCESS_TOKEN_SECRET,
 		{expiresIn: '15m'}
@@ -198,12 +216,19 @@ function generateAccessToken(user) {
 
 app.post('/token', (req, res) => {
 	const authHeader = req.headers['authorization']
+	// console.log(authHeader)
 	const refreshToken = authHeader && authHeader.split(' ')[1]
+	// console.log(refreshToken)
+	// console.log(refreshTokens)
+
 	if (refreshToken == null) return res.json({ status: 'error', error: 'No refrresh token found' })
 	if (!refreshTokens.includes(refreshToken)) return res.json({ status: 'error', error: 'Invalid token' })
-	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
+		// console.log(user)
+		const user1 = await User.findOne({ ign: user.ign}).lean();
+		// console.log(user1)
 		if (err) return res.json({ status: 'error', error: 'Invalid token' })
-		const accessToken = generateAccessToken({ user })
+		const accessToken = generateAccessToken(user1)
 		res.json({ accessToken: accessToken })
 	})
 })
@@ -215,6 +240,7 @@ app.delete('/api/logout', (req, res) => {
 	res.json({ status: 'ok'})
   }
 )
+
 
 app.post('/api/gamePlayedDuration', authenticateToken, async (req, res) => {
 	const {gameName, duration_mins} = await req.body;
@@ -245,7 +271,18 @@ app.post('/api/gamePlayedDuration', authenticateToken, async (req, res) => {
 app.get('/api/gamePlayedDuration', async (req, res, authenticateToken) => {
 	DurationGame.find({}, (err, net) => {
 		return res.json({status: 'ok', res: net});
-	})
+})
+
+app.post('/api/games/guess-the-color', authenticateToken, entry)
+app.post('/api/games/tetris', authenticateToken, entry)
+app.post('/api/games/game-2048', authenticateToken, entry)
+app.post('/api/games/flappy-bird', authenticateToken, entry)
+app.post('/api/games/classic-snake', authenticateToken, entry)
+
+app.get('/api/leaderboard', authenticateToken, async (req, res) => {
+	const {gameName} = await req.body
+	let records = await Leaderboard.find({gameName: gameName}).limit(10).sort([["score", "desc"]]).exec()
+	res.json(records)
 })
 
 app.listen(process.env.PORT || port)
