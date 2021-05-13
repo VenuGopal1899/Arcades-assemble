@@ -268,9 +268,10 @@ app.post('/api/gamePlayedDuration', authenticateToken, async (req, res) => {
 	return res.json({status: 'ok'});
 })
 
-app.get('/api/gamePlayedDuration', async (req, res, authenticateToken) => {
-	DurationGame.find({}, (err, net) => {
-		return res.json({status: 'ok', res: net});
+app.get('/api/gamePlayedDuration', authenticateToken, async (req, res) => {
+	DurationGame.find({}, (err, res) => {
+		return res.json({status: 'ok', res: res});
+	})
 })
 
 app.post('/api/games/guess-the-color', authenticateToken, entry)
