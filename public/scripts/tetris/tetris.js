@@ -1,6 +1,11 @@
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
 
+var startTimeStamp;
+var endTimeStamp;
+var isLoggedIn = true;
+const gameName = "Tetris";
+
 document.querySelectorAll("button").forEach( function(item) {
     item.addEventListener('focus', function() {
         this.blur();
@@ -110,6 +115,7 @@ function removePiece() {
 }
 /* Funtion to draw board */
 function drawBoard(gameBoard) {
+    startTimeStamp = new Date();
     for(var i = 0; i < row; i++)
         for(var j = 0;j < col; j++)
             drawPixel( j, i, gameBoard[i][j]);
@@ -438,6 +444,11 @@ function newGame() {
 }
 /* Funtion to end current game */
 function gameOver() {
+    endTimeStamp = new Date();
+    const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
+    if(isLoggedIn){
+        recordDurationStatistics(gameName, duration_mins);
+    }
     document.getElementById("game-over-tetris").innerHTML = "Game Over!";
     document.getElementById("startgame").innerHTML = "Play Again ?";
     score=lineClear*10;
@@ -546,14 +557,13 @@ drawHoldPieceBoard(holdBoard);
 setInterval( defaultDrop, 1000/difficultyLevel);
 
 function logout(){
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-    }
-    window.location.href = "http://localhost:4000/login";
+    isLoggedIn = false;
+    userLogout();
 }
 
 function checkLoginStatus(){
   if(!localStorage.getItem("JWT")){
     document.getElementById("login-btn").innerHTML = "Login";
+    isLoggedIn = false;
   }
 }

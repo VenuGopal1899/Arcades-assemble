@@ -7,8 +7,5 @@ function checkLoginStatus(){
 }
 
 function logout(){
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-    }
-    window.location.href = "http://localhost:4000/login";
+    userLogout();
 }

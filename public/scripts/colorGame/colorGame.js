@@ -13,6 +13,11 @@ var score = 0;
 var maxScore = 100;
 var alreadyWon = false;
 
+var startTimeStamp;
+var endTimeStamp;
+var isLoggedIn = true;
+const gameName = "Guess the color";
+
 const sound={
     select: new Audio('../../resources/colorGame/sounds/select.mp3')
 }
@@ -26,15 +31,14 @@ function init(){
 }
 
 function logout(){
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-    }
-    window.location.href = "http://localhost:4000/login";
+	isLoggedIn = false;
+    userLogout();
 }
 
 function checkLoginStatus(){
 	if(!localStorage.getItem("JWT")){
 		document.getElementById("login-btn").innerHTML = "Login";
+		isLoggedIn = false;
 	}
 }
 function setupModeButtons(){
@@ -61,6 +65,11 @@ function setupSquares(){
 				score += maxScore;
 				sound.select.play();
 				}
+				endTimeStamp = new Date();
+				const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
+				if(isLoggedIn){
+					recordDurationStatistics(gameName, duration_mins);
+				}
 				alreadyWon = true;
 				messageDisplay.textContent = "SCORE : " + score;
 				resetButton.textContent = "Play Again?"
@@ -80,6 +89,9 @@ function setupSquares(){
 
 
 function reset(){
+	if(!alreadyWon){
+		startTimeStamp = new Date();
+	}
 	maxScore = 100;
 	alreadyWon = false;
 	colors = generateRandomColors(numSquares);
