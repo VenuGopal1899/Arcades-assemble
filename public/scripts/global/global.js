@@ -93,7 +93,7 @@ async function getLeaderboardScores(gameName){
     var innerhtml = "";
 
     for(var i=0; i<length; i++){
-      currScoreHtml = `<div class="single-member-score"><div class="position_number">${i+1}</div><div class="details-for-member"><div class="profile-pic"></div><span class="name">${result.records[i].ign}</span><span class="score">${result.records[i].score} pts.</span></div></div>`
+      currScoreHtml = `<div class="single-member-score"><div class="position_number">${i+1}</div><div class="details-for-member"><div><img class="profile-pic" src="https://www.gravatar.com/avatar/${result.records[i].hashedEmail}?d=monsterid"/></div><span class="name">${result.records[i].ign}</span><span class="score">${result.records[i].score} pts.</span></div></div>`
       innerhtml = innerhtml + currScoreHtml;
     }
 
