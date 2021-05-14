@@ -132,7 +132,6 @@
 .profile-pic {
     border-radius: 40px;
     border: 1px solid black;
-    background-image: url("../resources/leaderboard/images/player.png");
     background-size: 100%;
     height:35px;
     width:35px;
