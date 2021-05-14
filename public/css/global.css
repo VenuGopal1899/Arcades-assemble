@@ -1,6 +1,6 @@
 /*////leaderboard popup/////////*/
 .modal-container {
-    background-color:black;
+    background-color:antiquewhite;
     position: fixed;
     display: flex;
     align-items: center;
@@ -26,14 +26,14 @@
     flex-direction:column;
     align-items: center;
     justify-content: center;
-    width:600px;
+    width:500px;
     max-width:100%;
     box-shadow:  0 10px 10px rgba(0,0,0,0.2);
     border-radius: 5px;
-    padding: 30px 50px;
+    padding: 30px 0px 70px 0px;
     text-align: center;
     position: relative;
-    height:80%;
+    height:500px;
 }
 .modal h1 {
     margin:0;
@@ -185,4 +185,6 @@
     background-size: 100%;
     -webkit-background-clip:text;
     -webkit-text-fill-color: transparent;
+    font-size: 26px;
+    font-family: 'Cinzel Decorative';
 }

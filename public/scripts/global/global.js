@@ -88,11 +88,20 @@ async function getLeaderboardScores(gameName){
     })
   }).then(res => res.json())
 
-  if(result.status == 'error' && result.tokenExpired){
-    getNewAcessToken();
-    getLeaderboardScores(gameName);
+  if(result.status === 'ok'){
+    var length = (result.records.length >= 5) ? 5 : result.records.length;
+    var innerhtml = "";
+
+    for(var i=0; i<length; i++){
+      currScoreHtml = `<div class="single-member-score"><div class="position_number">${i+1}</div><div class="details-for-member"><div class="profile-pic"></div><span class="name">${result.records[i].ign}</span><span class="score">${result.records[i].score} pts.</span></div></div>`
+      innerhtml = innerhtml + currScoreHtml;
+    }
+
+    // console.log('innerhtml ' ,innerhtml);
+    return innerhtml;
   }
-  else if(result.status === 'ok'){
-    return result.records;
+  else if(result.status == 'error' && result.tokenExpired){
+    await getNewAcessToken();
+    getLeaderboardScores(gameName);
   }
 }
