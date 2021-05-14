@@ -11,7 +11,7 @@ async function getNewAcessToken(){
   if(localStorage.getItem("JWT")){
     localStorage.removeItem("JWT");
   }
-  localStorage.setItem("JWT", newAccessToken);
+  localStorage.setItem("JWT", newAccessToken.accessToken);
 }
 
 async function recordDurationStatistics(gameName, duration_mins){
