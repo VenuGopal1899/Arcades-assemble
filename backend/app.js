@@ -266,9 +266,9 @@ app.post('/api/gamePlayedDuration', authenticateToken, async (req, res) => {
 	return res.json({status: 'ok'});
 })
 
-app.get('/api/gamePlayedDuration', authenticateToken, async (req, res) => {
-	DurationGame.find({}, (err, res) => {
-		return res.json({status: 'ok', res: res});
+app.get('/api/gamePlayedDuration', async (req, res) => {
+	DurationGame.find({}, (err, r) => {
+		return res.json({status: 'ok', r: r});
 	})
 })
 
