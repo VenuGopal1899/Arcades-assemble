@@ -565,10 +565,10 @@ function logout(){
 }
 
 function checkLoginStatus(){
-  if(!localStorage.getItem("JWT")){
-    document.getElementById("login-btn").innerHTML = "Login";
-    isLoggedIn = false;
-  }
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+        document.getElementById("login-btn").innerHTML = "Login";
+        isLoggedIn = false;
+    }
 }
 
 const scoresList = document.getElementsByClassName("members-with-score")[0];

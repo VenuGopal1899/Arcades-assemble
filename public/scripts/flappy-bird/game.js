@@ -617,7 +617,7 @@ function logout(){
 }
 
 function checkLoginStatus(){
-  if(!localStorage.getItem("JWT")){
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
     document.getElementById("login-btn").innerHTML = "Login";
     isLoggedIn = false;
   }
