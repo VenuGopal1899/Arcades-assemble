@@ -97,6 +97,9 @@ async function getLeaderboardScores(gameName){
       innerhtml = innerhtml + currScoreHtml;
     }
 
+    if(!innerhtml){
+      innerhtml = '<div class="empty-board" style="padding: 19px;"><span style="color: darkblue;font-size: 21px;">Looks like no one tops the board yet. Be the first.</span></div>';
+    }
     // console.log('innerhtml ' ,innerhtml);
     return innerhtml;
   }
