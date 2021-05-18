@@ -1,9 +1,19 @@
 const Leaderboard = require("../models/leaderboard");
+const User = require("../models/user");
 
 exports.entry = async (req, res) => {
     const {gameName, ign, hashedEmail, score} = await req.body;
 
 	try {
+		// Update individual game high scores for that user
+		const highscoreEntry = 'highscore_' + gameName.replace(/-/g, "_");
+
+		User.find({ign: ign}, (err, res) => {
+			res[0][`${highscoreEntry}`] = (res[0][`${highscoreEntry}`] > score) ? res[0][`${highscoreEntry}`] : score;
+			res[0].save();
+			console.log('User high score updated');
+		})
+
 		// Check for existing entry from that user
 		const entryFound = await Leaderboard.findOne({ gameName: gameName, ign: ign}
 			// , (err,res) => {
