@@ -327,8 +327,8 @@ function onEachFrame(timestamp) {
 }
 
 function startGame() {
-  startBtn.disabled = false;
-  pauseBtn.disabled = true;
+  startBtn.disabled = true;
+  pauseBtn.disabled = false;
   startAnimation();
 }
 
@@ -486,7 +486,7 @@ function init() {
     speed: STARTSPEED,
     score: 0,
     directionBuffer: [],
-    state: STATE_PAUSED,
+    state: STATE_PLAYING,
   };
   cancelAnimationFrame(requestAnimationFrameID);
   if(hardMode === 1){
