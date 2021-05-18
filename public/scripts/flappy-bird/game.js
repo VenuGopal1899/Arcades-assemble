@@ -1,21 +1,25 @@
+var startTimeStamp;
+var endTimeStamp;
+var isLoggedIn = true;
+const gameName = "flappy-bird";
+var gameScore = 0;
+
 ! function(t) {
     var e = {};
     var modal = document.querySelector("#myModal");
     var btn = document.querySelector(".leaderboard_pop");
 
     /////leaderboard pop up///////////
-    btn.addEventListener("click", function(){
-        modal.style.display = "block";
-    })
-    var span = document.getElementsByClassName("close")[0];
-    span.addEventListener("click", function(){
-        modal.style.display = "none";
-    })
-    window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-    }
+    const open = document.getElementById("open");
+    const modal_Container = document.getElementById("modal_container");
+    const close = document.getElementById("close");
+
+    open.addEventListener("click",() => {
+        modal_Container.classList.add("show");
+    });
+    close.addEventListener("click",() => {
+        modal_Container.classList.remove("show");
+    });
     function s(i) {
         if (e[i]) return e[i].exports;
         var r = e[i] = {
@@ -514,7 +518,7 @@
         }, {
             key: "addScore",
             value: function() {
-                this.score++, this.bestScore = Math.max(this.score, this.bestScore), localStorage.setItem("bestScore", this.bestScore), this.fx.play("score")
+                gameScore = ++this.score, this.bestScore = Math.max(this.score, this.bestScore), localStorage.setItem("bestScore", this.bestScore), this.fx.play("score")
             }
         }, {
             key: "run",
@@ -582,12 +586,20 @@
                 }), this.canvas.addEventListener("click", (function(e) {
                     switch (t.state) {
                         case t.states.getReady:
+                            startTimeStamp = new Date();
                             t.start();
                             break;
                         case t.states.game:
                             t.player.flap(), t.fx.play("flap");
                             break;
                         case t.states.gameOver:
+                            endTimeStamp = new Date();
+                            const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
+                            if(isLoggedIn){
+                                recordDurationStatistics(gameName, duration_mins);
+                                var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+                                addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, gameScore);
+                            }
                             var s = t.canvas.getBoundingClientRect(),
                                 i = e.clientX - s.left,
                                 r = e.clientY - s.top;
@@ -600,14 +612,24 @@
 }]);
 
 function logout(){
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-    }
-    window.location.href = "http://localhost:4000/login";
+    isLoggedIn = false;
+    userLogout();
 }
 
 function checkLoginStatus(){
-  if(!localStorage.getItem("JWT")){
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
     document.getElementById("login-btn").innerHTML = "Login";
+    isLoggedIn = false;
   }
+}
+
+const scoresList = document.getElementsByClassName("members-with-score")[0];
+
+async function getScores(){
+    if(isLoggedIn){
+        const innerhtml = await getLeaderboardScores(gameName);
+        scoresList.innerHTML = innerhtml;
+    } else {
+        scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
+    }
 }

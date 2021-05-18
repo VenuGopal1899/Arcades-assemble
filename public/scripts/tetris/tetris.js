@@ -1,6 +1,12 @@
 var modal = document.querySelector("#myModal");
 var btn = document.querySelector(".leaderboard_pop");
 
+var startTimeStamp;
+var endTimeStamp;
+var isLoggedIn = true;
+const gameName = "tetris";
+var gameScore = 0;
+
 document.querySelectorAll("button").forEach( function(item) {
     item.addEventListener('focus', function() {
         this.blur();
@@ -110,6 +116,7 @@ function removePiece() {
 }
 /* Funtion to draw board */
 function drawBoard(gameBoard) {
+    startTimeStamp = new Date();
     for(var i = 0; i < row; i++)
         for(var j = 0;j < col; j++)
             drawPixel( j, i, gameBoard[i][j]);
@@ -438,6 +445,14 @@ function newGame() {
 }
 /* Funtion to end current game */
 function gameOver() {
+    endTimeStamp = new Date();
+    const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
+    gameScore = lineClear*10;
+    if(isLoggedIn){
+        recordDurationStatistics(gameName, duration_mins);
+        var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+        addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, gameScore);
+    }
     document.getElementById("game-over-tetris").innerHTML = "Game Over!";
     document.getElementById("startgame").innerHTML = "Play Again ?";
     score=lineClear*10;
@@ -528,32 +543,44 @@ function defaultDrop() {
     return true;
 }
 /////leaderboard pop up///////////
-btn.addEventListener("click", function(){
-	modal.style.display = "block";
-})
-var span = document.getElementsByClassName("close")[0];
-span.addEventListener("click", function(){
-	modal.style.display = "none";
-})
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+const open = document.getElementById("open");
+const modal_Container = document.getElementById("modal_container");
+const close = document.getElementById("close");
+
+open.addEventListener("click",() => {
+    modal_Container.classList.add("show");
+});
+close.addEventListener("click",() => {
+    modal_Container.classList.remove("show");
+});
+
 drawBoard(board);
 drawPieceBoard(pieceBoard);
 drawHoldPieceBoard(holdBoard);
 setInterval( defaultDrop, 1000/difficultyLevel);
 
 function logout(){
-    if(localStorage.getItem("JWT")){
-        localStorage.removeItem("JWT");
-    }
-    window.location.href = "http://localhost:4000/login";
+    isLoggedIn = false;
+    userLogout();
 }
 
 function checkLoginStatus(){
-  if(!localStorage.getItem("JWT")){
-    document.getElementById("login-btn").innerHTML = "Login";
-  }
+    if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+        document.getElementById("login-btn").innerHTML = "Login";
+        isLoggedIn = false;
+    }
 }
+
+const scoresList = document.getElementsByClassName("members-with-score")[0];
+
+async function getScores(){
+    if(isLoggedIn){
+        const innerhtml = await getLeaderboardScores(gameName);
+        scoresList.innerHTML = innerhtml;
+    } else {
+        scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
+    }
+}
+
+
+

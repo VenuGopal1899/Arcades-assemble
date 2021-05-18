@@ -30,7 +30,7 @@ body .snake-game{
   margin-top: 3px;
 }
 
-.scores {
+.snake-game .scores {
   color: rgb(0, 113, 243);
   text-align: center;
   display: flex;
@@ -38,7 +38,7 @@ body .snake-game{
   font-family: "Montserrat";
 }
 
-.score {
+.snake-game .score {
   text-align: center;
   margin: 10px 20px;
   width: fit-content;
@@ -46,8 +46,8 @@ body .snake-game{
   display: flex;
 }
 
-.score-number,
-.high-score-number {
+.snake-game .score-number,
+.snake-game .high-score-number {
   margin: 0px 8px;
 }
 
@@ -56,7 +56,7 @@ body .snake-game{
   justify-content: space-between;
 }
 
-button {
+.snake-game button {
   height: 2rem;
   width: 6rem;
   background-color: #007bff;
@@ -68,13 +68,13 @@ button {
   padding-bottom: 30px;
 }
 
-button:hover:enabled {
+.snake-game button:hover:enabled {
   border-color: #007bff;
   background-color: #fff;
   color: #007bff;
 }
 
-button:disabled {
+.snake-game button:disabled {
   color: #fff;
   background-color: #808080;
   border-color: #000000;
@@ -429,7 +429,7 @@ a:hover{
   	height: 100px;
 	position: fixed;
     bottom: 30px;
-    right: 10px; 
+    right: 10px;
     line-height: 1;
     cursor: pointer;
 	-webkit-animation: wobble-hor-bottom 5s both;
@@ -447,49 +447,6 @@ a:hover{
   font-weight: bold;
 }
 
-
-/*////leaderboard popup/////////*/
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1001; 
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height:inherit; 
-  overflow: auto; 
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4); 
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #0099ff;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
-  height: 70%;
-  align-self: center;
-  border-radius: 10%;
-}
-
-/* The Close Button */
-.close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  margin-right: 10px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
 @-webkit-keyframes wobble-hor-bottom {
   0%,
   100% {
@@ -556,5 +513,3 @@ a:hover{
             transform: translateX(0%);
   }
 }
-
-

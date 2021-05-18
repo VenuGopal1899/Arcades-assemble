@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema(
 			required: true,
 			unique: true
 		},
+		hashedEmail: {
+			type: String
+		},
 		ign: {
 			type: String,
 			required: true,
@@ -31,6 +34,26 @@ const UserSchema = new mongoose.Schema(
 		},
 		emailSecret: {
 			type: String,
+		},
+		highscore_flappy_bird: {
+			type: Number,
+			default: 0
+		},
+		highscore_classic_snake: {
+			type: Number,
+			default: 0
+		},
+		highscore_game_2048: {
+			type: Number,
+			default: 0
+		},
+		highscore_guess_the_color: {
+			type: Number,
+			default: 0
+		},
+		highscore_tetris: {
+			type: Number,
+			default: 0
 		}
 	},
 	{ timestamps: true }

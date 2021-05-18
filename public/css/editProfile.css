@@ -1,0 +1,164 @@
+body {
+    background-image: linear-gradient(rgba(31, 28, 24, 1), rgba(252, 10, 10, 0.1)),
+      url('/resources/gamerProfile/images/gamer2-mini.jpg');
+    background-repeat: no repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+    overflow: hidden;
+    font-family: Verdana, sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    backdrop-filter: blur(10px);
+  }
+  
+  h1 {
+    text-transform: uppercase;
+    color: white;
+    font-size: 30px;
+  }
+  .exit a {
+    color: white;
+    text-decoration: none;
+  }
+  .exit {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    color: white;
+    font-size: 3em;
+    cursor: pointer;
+  }
+  
+  .container {
+    width: 100%;
+    padding-bottom: 2px;
+    margin: auto;
+    text-align: center;
+    max-height: 15%;
+    vertical-align: middle;
+  }
+  
+  .avatar {
+    -webkit-animation: flip-scale-up-ver 0.5s linear both;
+    animation: flip-scale-up-ver 0.5s linear both;
+    width: 10%;
+    /* border-color: white;
+    border-style: solid; */
+    border-radius: 15%;
+    vertical-align: middle;
+    align-self: center;
+    margin: auto;
+    text-align: center;
+    object-fit: contain;
+    justify-self: auto;
+    align-content: center;
+    justify-content: center;
+  }
+  .avatarimg {
+    object-fit: contain;
+    width: 95%;
+    height: 90%;
+    object-fit: contain;
+    border-radius: 15%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: ivory;
+    object-fit: fill;
+  }
+  .box {
+    margin: 4em auto 0 auto;
+    border: 7px solid white;
+    border-radius: 15%;
+    padding: 30px;
+    width: 300px;
+    height: 300px;
+  }
+  input {
+    background-size: 20px 80px;
+    background-position: 0.5em 0.6em;
+    border: none;
+    font-weight: 200;
+    color: rgba(80, 80, 80, 1);
+    padding: 0 1em 0 2em;
+    margin: 0 0 1em 0;
+    width: 20em;
+    height: 2.8em;
+    outline: none;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+  }
+  input:first-child {
+    margin: 1.5em 0 1em 0;
+  }
+  input:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  input:focus {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  .submit {
+    background-size: 30px 50px;
+    border-radius: 5px;
+    background-color: #e7e7e7;
+    color: black;
+    font-size: 18px;
+    padding: auto;
+    margin: 1.4em 0 1em 0;
+    width: 150px;
+    height: 40px;
+  }
+  .submit:hover {
+    background-color: rgb(84, 128, 128);
+  }
+  .toggle-show{
+    width: 100%;
+    height: 30px;
+    background-color: rgb(39, 38, 38);
+    color: white;
+    line-height: 1.6;
+    bottom: 0px;
+    left: 0px;
+    position: fixed;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
+  }
+  .toggle-show .show{
+    visibility: visible;
+  }
+  
+  @-webkit-keyframes flip-scale-up-ver {
+    0% {
+      -webkit-transform: scale(1) rotateY(0);
+      transform: scale(1) rotateY(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateY(90deg);
+      transform: scale(2) rotateY(90deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateY(180deg);
+      transform: scale(1) rotateY(180deg);
+    }
+  }
+  @keyframes flip-scale-up-ver {
+    0% {
+      -webkit-transform: scale(1) rotateY(0);
+      transform: scale(1) rotateY(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateY(90deg);
+      transform: scale(2) rotateY(90deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateY(180deg);
+      transform: scale(1) rotateY(180deg);
+    }
+  }
+  @media only screen and (max-height: 480px){
+    body{
+      overflow:auto;
+    }
+  }

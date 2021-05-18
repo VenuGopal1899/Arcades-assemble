@@ -13,6 +13,12 @@ const STATE_PLAYING = 1;
 const STATE_GAME_OVER = 2;
 const STATE_PAUSED = 3;
 
+var startTimeStamp;
+var endTimeStamp;
+var isLoggedIn = true;
+const gameName = "classic-snake";
+var gameScore = 0;
+
 const board = document.querySelector(".board");
 
 const score = document.querySelector(".score-number");
@@ -145,6 +151,7 @@ function eatFood() {
 }
 
 function showScore() {
+  gameScore = gameState.score;
   score.innerHTML = gameState.score;
 }
 
@@ -320,12 +327,19 @@ function onEachFrame(timestamp) {
 }
 
 function startGame() {
-  startBtn.disabled = true;
-  pauseBtn.disabled = false;
+  startBtn.disabled = false;
+  pauseBtn.disabled = true;
   startAnimation();
 }
 
 function gameOver() {
+  endTimeStamp = new Date();
+  const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
+  if(isLoggedIn){
+    recordDurationStatistics(gameName, duration_mins);
+    var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+    addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, gameScore);
+  }
   if (audio.enabled) {
     audio.hit.play().catch(() => (gameOverText.style.display = "initial"));
     audio.hit.addEventListener("ended", () => {
@@ -335,7 +349,6 @@ function gameOver() {
   } else {
     gameOverText.style.display = "initial";
   }
-
   gameState.state = STATE_GAME_OVER;
 
 
@@ -465,6 +478,7 @@ function toggleAudio() {
 }
 
 function init() {
+  startTimeStamp = new Date();
   gameState = {
     snake: [147, 146, 145],
     snakeStart: 147,
@@ -472,7 +486,7 @@ function init() {
     speed: STARTSPEED,
     score: 0,
     directionBuffer: [],
-    state: STATE_PLAYING,
+    state: STATE_PAUSED,
   };
   cancelAnimationFrame(requestAnimationFrameID);
   if(hardMode === 1){
@@ -501,31 +515,39 @@ newGameBtn.addEventListener("click", init);
 audioBtn.addEventListener("click", toggleAudio);
 
 /////leaderboard pop up///////////
-btn.addEventListener("click", function(){
-	modal.style.display = "block";
-})
-var span = document.getElementsByClassName("close")[0];
-span.addEventListener("click", function(){
-	modal.style.display = "none";
-})
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+const open = document.getElementById("open");
+const modal_Container = document.getElementById("modal_container");
+const close = document.getElementById("close");
+
+open.addEventListener("click",() => {
+    modal_Container.classList.add("show");
+});
+close.addEventListener("click",() => {
+    modal_Container.classList.remove("show");
+});
 
 init();
 startMusic();
 
 function logout(){
-  if(localStorage.getItem("JWT")){
-      localStorage.removeItem("JWT");
-  }
-  window.location.href = "http://localhost:4000/login";
+  isLoggedIn = false;
+  userLogout();
 }
 
 function checkLoginStatus(){
-  if(!localStorage.getItem("JWT")){
+  if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
     document.getElementById("login-btn").innerHTML = "Login";
+    isLoggedIn = false;
+  }
+}
+
+const scoresList = document.getElementsByClassName("members-with-score")[0];
+
+async function getScores(){
+  if(isLoggedIn){
+    const innerhtml = await getLeaderboardScores(gameName);
+    scoresList.innerHTML = innerhtml;
+  } else {
+    scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
   }
 }
