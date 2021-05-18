@@ -49,6 +49,9 @@ async function userLogout(){
       localStorage.removeItem("JWT");
       localStorage.removeItem("RefreshToken");
     }
+    if(sessionStorage.getItem("user")){
+      sessionStorage.removeItem("user");
+    }
   })
   .then(() => {
     window.location.href = "http://localhost:4000/login";
@@ -104,4 +107,52 @@ async function getLeaderboardScores(gameName){
     await getNewAcessToken();
     getLeaderboardScores(gameName);
   }
+}
+
+async function getProfile(){
+  const ACCESS_TOKEN = localStorage.getItem("JWT");
+  const ign = JSON.parse(window.atob(ACCESS_TOKEN.split('.')[1])).ign;
+  // const ign = obj.ign;
+  console.log(ign);
+  const response = await fetch('/api/profile', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'ACCESS_TOKEN '+ ACCESS_TOKEN,
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      ign
+    })
+  })
+  .catch(err => console.log(err))
+  .then(res => res.json())
+  .then((res) => {
+    console.log(res.user);
+    showProfile(res.user);
+  });
+}
+
+async function editProfile(){
+  const firstName = document.getElementById("firstName").value;
+  const middleName = document.getElementById("middleName").value;
+  const lastName = document.getElementById("lastName").value;
+  // const ACCESS_TOKEN = localStorage.getItem("JWT");
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const ign = user.ign;
+  const result = await fetch('/api/editProfile', {
+  method: 'POST',
+  headers: {
+    'Content-type' : 'application/json'
+  },
+  body: JSON.stringify({
+    ign, firstName, middleName, lastName
+  })
+  }).then(() => {
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.middleName = middleName;
+      let uuser = JSON.stringify(user);
+      sessionStorage.setItem("user", uuser);
+      window.location.href="http://localhost:4000/gamerProfile";
+  });
 }

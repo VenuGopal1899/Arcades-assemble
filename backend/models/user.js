@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema(
 		emailSecret: {
 			type: String,
 		},
-		highscore_flappybird: {
+		highscore_flappy_bird: {
 			type: Number,
 			default: 0
 		},
@@ -43,7 +43,7 @@ const UserSchema = new mongoose.Schema(
 			type: Number,
 			default: 0
 		},
-		highscore_2048: {
+		highscore_game_2048: {
 			type: Number,
 			default: 0
 		},

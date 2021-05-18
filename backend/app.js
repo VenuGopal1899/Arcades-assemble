@@ -65,6 +65,7 @@ app.get('/games/classic-snake', (req, res) => res.render('classic-snake.html'));
 app.get('/signup', (req, res) => res.render('signup.html'));
 app.get('/login', (req, res) => res.render('login.html'));
 app.get('/gamerProfile', (req, res) => res.render('gamerProfile.html'));
+app.get('/editProfile', (req, res) => res.render('editProfile.html'));
 
 
 let refreshTokens = []
@@ -239,6 +240,25 @@ app.delete('/api/logout', (req, res) => {
   }
 )
 
+app.post('/api/profile', authenticateToken, async (req, res) => {
+	// console.log(req.user);
+	const {ign} = await req.body;
+	let user = await User.findOne({ign: ign}, {password: 0, emailSecret: 0, _id: 0});
+	if(user) {
+		// console.log(user);
+		return res.json({status: 'okay', user: user})
+	}
+	else{
+		res.json({status: 'error', msg: 'user not found'});
+	}
+})
+
+app.post('/api/editProfile', async (req, res) => {
+	const { ign, firstName, lastName, middleName } = req.body;
+	const newDetails = {firstName: firstName, lastName: lastName, middleName: middleName};
+	const user = await User.findOneAndUpdate({ ign: ign }, newDetails, {new: true});
+	return res.json({ status: 'ok', msg: 'Entry updated'});
+})
 
 app.post('/api/gamePlayedDuration', authenticateToken, async (req, res) => {
 	const {gameName, duration_mins} = await req.body;
