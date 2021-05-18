@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Profile</title>
+        <link rel="stylesheet" type="text/css" href="/css/editProfile.css">
+        <script src="/scripts/global/global.js"></script>
+    </head>
+    <body>
+        <h1>SISU</h1> 
+        <div class="exit"><a href="/gamerProfile">&times;</a></div>
+        <div class="container">
+            <div class="avatar"><img class = "avatarimg" src="" width="80%" height="90%"></div>
+        </div>
+        <div class="box">
+            <form class="edit profile">
+                <input id="firstName" class="firstName" type="text" name="firstName" placeholder="First Name" autocomplete="off" contenteditable="true" required><br>
+                <input id="middleName" class="middleName" type="text" name="middleName" placeholder="Middle Name" autocomplete="off" contenteditable="true"><br>
+                <input id="lastName" class="lastName" type="text" name="lastName" placeholder="Last Name" autocomplete="off" contenteditable="true"><br>
+                <input id="email" class="useremail" type="email" name="email" placeholder="xyz@email.com" autocomplete="off" readonly><br>
+                <button id="submit" class="submit" type="submit">Save Changes</button>
+            </form>
+        </div>
+        <script type="text/javascript" src="/scripts/gamerProfile/editProfile.js"></script>  
+    </body>
+</html>
