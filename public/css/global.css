@@ -1,0 +1,193 @@
+/*////leaderboard popup/////////*/
+.modal-container {
+    background-color:antiquewhite;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    top:0;
+    left:0;
+    height:100vh;
+    width: 100vw;
+    pointer-events: none;
+    transition: opacity 0.4s ease-in-out;
+}
+.modal-container.show {
+    pointer-events: auto;
+    opacity: 1;
+    z-index: 1005;
+}
+.modal {
+    background: #D3CCE3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    width:500px;
+    max-width:100%;
+    box-shadow:  0 10px 10px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 30px 0px 70px 0px;
+    text-align: center;
+    position: relative;
+    height:500px;
+}
+.modal h1 {
+    margin:0;
+    font-family: 'Krona One', sans-serif;
+}
+.modal p{
+    font-size: 14px;
+    opacity: 0.7;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+.modal-container .close {
+    position: absolute;
+    right:10px;
+    top:10px;
+    font-size: 32px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.modal-container .close:hover {
+    color:#47a386;
+}
+.leaderboard {
+    position: relative;
+    top: 30px;
+    display: grid;
+    grid-template-rows: 1fr 7fr;
+    margin: 0 auto;
+    box-shadow: 10px 10px 5px rgb(32, 7, 7);
+    width: 60%;
+    min-width: 60%;
+    height: 435px;
+    border-radius:20px 20px 20px 0px;
+}
+.leaderboard-head {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 13px;
+    color:white;
+    border-radius:10px 10px 0px 0px;
+    background:chocolate;
+    background: #FF8008;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ba062d, #ba062d);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ba062d, #ba062d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#forimage {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    background-image: url("../resources/leaderboard/images/trophy.png");
+}
+.members-with-score {
+    display: flex;
+    flex-direction: column;
+    background:rgb(218, 219, 206);
+    border-radius:0px 0px 10px 3px;
+    justify-content: space-around;
+    padding: 15px 0 15px 0;
+}
+.single-member-score {
+    width:100%;
+    height:50px;
+    transition:all 0.1s ease-in;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.single-member-score:hover {
+    transform: scale(1.050);
+    border-radius: 18px;
+}
+.single-member-score {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+.position_number {
+    color: white;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    border-radius:0px 5px 5px 0 ;
+}
+.details-for-member {
+    background:white;
+    border-radius:5px 0 0 5px;
+    display: grid;
+    grid-template-columns:1.4fr 3fr 2fr;
+    padding: 4px;
+}
+.profile-pic {
+    border-radius: 40px;
+    border: 1px solid black;
+    background-size: 100%;
+    height:35px;
+    width:35px;
+    margin: auto 0;
+}
+.name {
+    margin: auto 0 12px 0;
+    color: rgb(158, 155, 155);
+    font-family: 'New Tegomin', serif;
+}
+.score {
+    margin: auto 0;
+    font-family: 'Zen Dots', cursive;
+    font-size: 10px;
+    margin-right: 8px;
+}
+.single-member-score:nth-child(2) .position_number {
+    background:chocolate;
+    background: #FF8008;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #2b2527, #cfcfcf);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #dbdbdb, #cfcfcf); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.single-member-score:nth-child(1) .position_number {
+    background:chocolate;
+    background: #FF8008;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #FFC837, #FF8008);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #FFC837, #FF8008);
+}
+.single-member-score:nth-child(3) .position_number {
+    background:chocolate;
+    background: #FF8008;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #693902, #693902);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #693902, #693902); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.single-member-score:nth-child(4) .position_number {
+    background:chocolate;
+    background: #FF8008;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #40484a, #40484a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #40484a, #40484a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.single-member-score:nth-child(5) .position_number {
+    background:chocolate;
+    background: #FF8008;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #ff4747, #ff4747);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #ff4747, #ff4747); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#arcade {
+    background-color: #ff8177;
+    background-image: linear-gradient(to right, #4CA1AF, #2C3E50);
+    background-size: 100%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color: transparent;
+    font-size: 26px;
+    font-family: 'Cinzel Decorative';
+}
+.not-logged-in span, .not-logged-in a{
+    color: brown;
+    font-size: 20px;
+}

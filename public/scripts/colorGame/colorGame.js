@@ -13,6 +13,12 @@ var score = 0;
 var maxScore = 100;
 var alreadyWon = false;
 
+var startTimeStamp;
+var endTimeStamp;
+var isLoggedIn = true;
+const gameName = "guess-the-color";
+var gameScore = 0;
+
 const sound={
     select: new Audio('../../resources/colorGame/sounds/select.mp3')
 }
@@ -23,6 +29,29 @@ function init(){
 	setupModeButtons();
 	setupSquares();
 	reset();
+}
+
+function logout(){
+	isLoggedIn = false;
+    userLogout();
+}
+
+function checkLoginStatus(){
+	if(!(localStorage.getItem("JWT") && localStorage.getItem("RefreshToken"))){
+		document.getElementById("login-btn").innerHTML = "Login";
+		isLoggedIn = false;
+	}
+}
+
+const scoresList = document.getElementsByClassName("members-with-score")[0];
+
+async function getScores(){
+    if(isLoggedIn){
+        const innerhtml = await getLeaderboardScores(gameName);
+        scoresList.innerHTML = innerhtml;
+    } else {
+        scoresList.innerHTML = '<div class="not-logged-in"><span>Please <a href="/login">login</a> to record your results.</span></div>';
+    }
 }
 
 function setupModeButtons(){
@@ -47,7 +76,15 @@ function setupSquares(){
 			if(clickedColor === pickedColor){
 				if(!alreadyWon){
 				score += maxScore;
+				gameScore = score;
 				sound.select.play();
+				}
+				endTimeStamp = new Date();
+				const duration_mins = parseFloat((endTimeStamp.getTime() - startTimeStamp.getTime())/60000).toFixed(3);
+				if(isLoggedIn){
+					recordDurationStatistics(gameName, duration_mins);
+					var payloadObject = JSON.parse(atob(localStorage.getItem("JWT").split('.')[1]));
+    				addScoreToLeaderboard(gameName, payloadObject.ign, payloadObject.hashedEmail, gameScore);
 				}
 				alreadyWon = true;
 				messageDisplay.textContent = "SCORE : " + score;
@@ -60,7 +97,7 @@ function setupSquares(){
 				messageDisplay.textContent = "SCORE : " + score;
 				sound.select.play();
 			}
-			
+
 		});
 	}
 }
@@ -68,6 +105,9 @@ function setupSquares(){
 
 
 function reset(){
+	if(!alreadyWon){
+		startTimeStamp = new Date();
+	}
 	maxScore = 100;
 	alreadyWon = false;
 	colors = generateRandomColors(numSquares);
@@ -131,18 +171,13 @@ function randomColor(){
 
 
 /////leaderboard pop up///////////
-btn.addEventListener("click", function(){
-	modal.style.display = "block";
-})
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-span.addEventListener("click", function(){
-	modal.style.display = "none";
-})
+const open = document.getElementById("open");
+const modal_Container = document.getElementById("modal_container");
+const close = document.getElementById("close");
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+open.addEventListener("click",() => {
+    modal_Container.classList.add("show");
+});
+close.addEventListener("click",() => {
+    modal_Container.classList.remove("show");
+});
